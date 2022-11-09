@@ -42,9 +42,11 @@ Content - interactive element of the prophet forecasts
 Content -  prophet forecasts, pictures and images
 Content - sueprvised learning confusion matrices and results
 
-![image](https://user-images.githubusercontent.com/107594143/200726138-f36d0874-c190-4892-82aa-5dde22834029.png)
-![image](https://user-images.githubusercontent.com/107594143/200726163-bb25fbf6-d76d-4109-a1ee-6efc6c5de306.png)
-![image](https://user-images.githubusercontent.com/107594143/200726179-d61d2292-f93a-4cf7-bdad-a95707fb1a9e.png)
+![image](https://user-images.githubusercontent.com/107594143/200726289-87a55eb0-3baa-4c47-9046-b330cabb97c3.png)
+![image](https://user-images.githubusercontent.com/107594143/200726349-853f5079-90b5-4810-8b3b-cb0eaa25fd3d.png)
+![image](https://user-images.githubusercontent.com/107594143/200726408-88600c60-bfcc-4ba8-9b77-c2e9e1bd7c07.png)
+![image](https://user-images.githubusercontent.com/107594143/200726446-069b5366-18ad-4289-8dff-59597cc63d56.png)
+
 
 
 
