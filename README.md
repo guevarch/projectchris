@@ -1,55 +1,146 @@
-# Project
-Topic: Bitcoin - How to determine if the network is over or undervalued based on metcalfe's law of network value and adoption.
-Reason: Bitcoin is a tool for financial freedom, inclusion and soverignty?.
-Data Souce: Blockchain.com bitcoin metrics such as supply, price, marketcap, volume, and open/close market prices.
-Question I hope to answer - can we reasonably determine if the network is under/over valued based on metcafle's law and network adoption.
-Terminology - active addresses, metcafe's law, value, network value, wallets, price, volume, open, close, bitcoin mining and supply. 
+# Introduction
+
+"Bitcoin is a bank in cyberspace, run by incorruptible software, offering a global, affordable, simple, & secure savings account to billions of people that don’t have the option or desire to run their own hedge fund." - Michael Saylor
+
+On 3 January 2009, the bitcoin network was created when Nakamoto mined the starting block of the chain, known as the genesis block. Embedded in the coinbase of this block was the text "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks". Bitcoin is a decentralized digital currency that can be transferred on the peer-to-peer bitcoin network. Bitcoin transactions are verified by network nodes through cryptography and recorded in a public distributed ledger called a blockchain. The cryptocurrency was invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto. The currency began use in 2009,] when its implementation was released as open-source software.
+
+I chose this topic because I believe bitcoin is a tool for economic sovereignty, individual property rights and financial inclusion. We can see evidence of this in the adoption rates in emerging markets or developing nations.
+
+The first objective is to use the Prophet time series model to forecast price, active addresses and value(according to Metcafe’s Law). The second objective is to determine if the current price is overvalued or undervalued compared to Metcafe’s Law of Network Adoptions. The supervised learning models used to model the data are DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
 
 # Method
 
-## Metcafe's Law Explanation, Collection, Loading, Cleaning.
+The first step in the process is to find the data. The data sources included market data such as price, open, close, adjusted close, and date. Other data sources that were needed for the analysis were active addresses, coin supply, and wallets. The file types are comma separated values.
 
-### Intro to Metcafe's Law and Bitcoin
-Graph supply chart for bitcoin, adoption in the form of active addresses, calculation for market cap, value and metcafe's law. Show formula to get network value, and log chart for prices. 
+List Data Sources: 
 
-### Collection, Loading and Cleaning 
-Collected market prices data such as open, close, adjusted close, volume and price from investing.com by simply downloading the csv from the website. I also needed to collect active wallet addresses and bitcoin supply through the years from blockchain.com. 
-#### SQL
-I created a database on pgadmin to create the market prices and active addresses data. I did an inner join using dates as my primary key for the market prices data and the active address data to form btcjoin.csv
-#### Pandas
-I cleaned the data by converting the dates to the correct format and the objects to floats. I then loaded the data to cleaning.ipnyb to merge the data set with the bitcoin supply. I updated the btcjoin.csv data that now contains market price data, active wallet addresses and supply.
+*** Add referencing ***
 
-## Preprocessing, Machine Learning and Analysis
-
-### Preprocessing data and interpretation
-Random Walk, Acf Auto Correlation, PAct partial autocorrelation, 1st and 2nd order differencing, p values, and adf values. 
-
-### Prophet
-Describe prophet method, results and graph for price predictions, network value and price predictions, and active addresses predictions.
-
-### Arima? Still not sure, I will finalize with Asim on the 15 nov.
-Describe prophet method, results and graph for price predictions, network value and price predictions, and active addresses predictions.
-
-### Supervised Learning
-Created a separate column for network value. I assigned a binary outcome of 1 for over valued, and 0 for under valued and named the column status. I made the target data as status, and everything else except the date as x non target. I split the data into train and test and conducted supervised learning models such as DecisionTreeClassifier, ExtraTreesClassifier, AdaBoostClassifier, and RandomForestClassifier to get the confusion matrix, accuracy, and sensitivity scores. 
-
-## Website Components
-Header - Bitcoin Project
-Copy website format https://bitcoin.org/en/ and colurs
-Contnet - introduction with video to bitcoin, metcafe's law, terminology etc
-Content - all preprocessing images and explanations which includes random walk, acf, pacf, and autocorrelation plot
-Content - interactive element of the prophet forecasts
-Content -  prophet forecasts, pictures and images
-Content - sueprvised learning confusion matrices and results
-
-![image](https://user-images.githubusercontent.com/107594143/200726289-87a55eb0-3baa-4c47-9046-b330cabb97c3.png)
-![image](https://user-images.githubusercontent.com/107594143/200726349-853f5079-90b5-4810-8b3b-cb0eaa25fd3d.png)
-![image](https://user-images.githubusercontent.com/107594143/200726408-88600c60-bfcc-4ba8-9b77-c2e9e1bd7c07.png)
-![image](https://user-images.githubusercontent.com/107594143/200726446-069b5366-18ad-4289-8dff-59597cc63d56.png)
+Next, is to create a database in PostgreSQL and create tables to house the csv data. A join function was used to combine two csv tables and psycopg2 was used to connect PostgreSQL to pandas dataframe. The new dataframe was further cleaned, cured and prepared for analysis and Prophet time series and supervised machine learning. 
 
 
+*** Add screenshots of sql ***
+
+# Results
+
+## Formulas and Terminology
+
+### Metcalfe's law = (Active Addressess)^2
+
+*** Add explanations and referencing ***
+
+### Price = Market Cap/Current Supply
+
+*** Add explanations and referencing ***
+
+### Value = (Metcafe’sl Law)^2
+
+### Network Value = Value - Price
+
+*** Add explanations and referencing ***
+
+## Preprocessing
+
+### Determining Stationary
+
+Stationary Time Series - The observations in a stationary time series are not dependent on time. Time series are stationary if they do not have trend or seasonal effects. Summary statistics calculated on the time series are consistent over time, like the mean or the variance of the observations. When a time series is stationary, it can be easier to model. Statistical modeling methods assume or require the time series to be stationary to be effective.
+
+Observations from a non-stationary time series show seasonal effects, trends, and other structures that depend on the time index. Summary statistics like the mean and variance do change over time, providing a drift in the concepts a model may try to capture. Classical time series analysis and forecasting methods are concerned with making non-stationary time series data stationary by identifying and removing trends and removing seasonal effects.
+
+Mean and Variance Test = non stationary, large differences in mean and variances.
+Data was split into two and ran mean and var tests.
+mean1 = 230.57, mean2 = 16936.32
+variance1=61688.13, variance2=288670101.60
+
+Histogram Linear
+
+*** Paste Histogram Picture***
+
+Non Gaussian curve indicates that this squashed distribution of the observations may be another indicator of a non-stationary time series.
+Reviewing the plot of the time series again, we can see that there is an obvious seasonality component, and it looks like the seasonality component is growing.
+This may suggest an exponential growth from season to season. A log transform can be used to flatten out exponential change back to a linear relationship.
+
+Histogram Log
+
+*** Paste Histogram Picture and log prices**
+
+We also create a line plot of the log transformed data and can see the exponential growth seems diminished, but we still have a trend and seasonal elements.
+
+Mean and Var Test Log
+mean1=3.963961, mean2=9.174585
+variance1=5.856168, variance2=1.358006
+
+Augmented Dickey-Fuller Test
+
+The null hypothesis of the test is that the time series can be represented by a unit root, that it is not stationary (has some time-dependent structure). The alternate hypothesis (rejecting the null hypothesis) is that the time series is stationary.
+
+Null Hypothesis (H0): If failed to be rejected, it suggests the time series has a unit root, meaning it is non-stationary. It has some time dependent structure.
+Alternate Hypothesis (H1): The null hypothesis is rejected; it suggests the time series does not have a unit root, meaning it is stationary. It does not have time-dependent structure.
+
+Linear ADF - Running the example prints the test statistic value of -1.769203. The more negative this statistic, the more likely we are to reject the null hypothesis (we have a stationary dataset). As part of the output, we get a look-up table to help determine the ADF statistic. We can see that our statistic value of  -1.769203 is greater than the value of -3.432 at 1%. This suggests that we cannot reject the null hypothesis with a significance level of less than 1%. Not rejecting the null hypothesis means that the process has unit root, and in turn that the time series is non stationary or does have time-dependent structure
+
+ADF Statistic: -1.769203
+p-value: 0.395855
+Critical Values:
+	1%: -3.432
+	5%: -2.862
+	10%: -2.567
+
+
+Log ADF - We can see that the value is larger than the critical values, again, meaning that we can fail to reject the null hypothesis and in turn that the time series is non-stationary.
+
+ADF Statistic: -3.182831
+p-value: 0.021000
+	1%: -3.432
+	5%: -2.862
+	10%: -2.567
+
+
+Preprocessing Conclusion: DATA IS NON STATIONARY - IT is time dependant
+
+A stationary time series is one whose statistical properties do not depend on the time at which the series is observed.15 Thus, time series with trends, or with seasonality, are not stationary — the trend and seasonality will affect the value of the time series at different times. On the other hand, a white noise series is stationary — it does not matter when you observe it, it should look much the same at any point in time.
+
+Prophet does not perform well on non-stationary data because it is difficult to find the actual seasonality and trend of the data if the patterns are inconsistent.
+
+Price prediction is very difficult to begin with. If we had working prediction models, then we would all be amazing stock pickers and billionaires. Nonetheless, the model does incredibly poor in predicting prices. The forecasts upper/lower bound are very off from the actual price.
+
+Add two graphs showing bad predictions
+
+*** Paste two different timelines with different predictions**
+
+## Prophet
+
+### Prices
+
+### Wallets
+
+### Active Addresses
+
+## Machine Learning Models 
+
+### DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
+
+### classification_report for each and explanations with images
+
+## Additional Thougth Experiment
+
+Bitcoin’s supply is capped at 21 million and currently it is at 19,201,975 coins right now and it is estimated that 4-6 million coins are permanently lost. According to analysis, 85.14% of existing bitcoins have not been transferred or sold for more than three months. Mathematically, if the denominator is fixed, and the numerator is the only variable that can substantially change - ultimately value of the network can only increase. At 800k active addresses and 84M wallets, there is a lot more room to grow.
+
+A quick thought experiment: lets assume a consistent halving supply issuance, ratio of 82 wallets/active addresses, and assume 30% increase in adoption per year.
+
+*** project bitcoin projection table 2032 *** 
+*** show woobull bitcoin inflation rate *** 
 
 
 
+# References
 
-
+References
+1. 9.1 Stationarity and differencing | Forecasting: Principles and Practice (3rd ed). (n.d.). https://otexts.com/fpp3/stationarity.html
+2. Author At, |. (n.d.). Top Cryptocurrency Countries by Adoption (2022 Data). Bankless Times. https://www.banklesstimes.com/cryptocurrency/top-countries-leading-in-cryptocurrency-adoption/
+3. Bitcoin. (n.d.). MicroStrategy. https://www.michael.com/en/bitcoin
+4. Bitcoin Inflation : Woobull Charts. (n.d.). https://charts.woobull.com/bitcoin-inflation/
+5. Brownlee, J. (2016, December 30). How to Check if Time Series Data is Stationary with Python. Machine Learning Mastery. https://machinelearningmastery.com/time-series-data-stationary-python/
+6. keziesuemo. (2021, October 15). Analysis Shows that about 85% of Circulating Bitcoin Has Not Been Sold in over Three Months. Remitano. https://remitano.com/news/dk/post/13973-analysis-shows-that-about-85-percent-of-circulating-bitcoin-has-not-been-sold-in-over-three-months
+7. Metcalfe’s Law - calculator. (n.d.). fxSolver. https://www.fxsolver.com/browse/formulas/Metcalfe%E2%80%99s+Law
+8. Wikipedia contributors. (2022, November 7). Bitcoin. Wikipedia. https://en.wikipedia.org/wiki/Bitcoin
