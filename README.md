@@ -60,7 +60,9 @@ variance1=61688.13, variance2=288670101.60
 
 Histogram Linear
 
-*** Paste Histogram Picture***
+<p align="center">
+  <img src="static\histogramlinear.png" width="350" title="hover text">
+</p>
 
 Non Gaussian curve indicates that this squashed distribution of the observations may be another indicator of a non-stationary time series.
 Reviewing the plot of the time series again, we can see that there is an obvious seasonality component, and it looks like the seasonality component is growing.
@@ -68,7 +70,10 @@ This may suggest an exponential growth from season to season. A log transform ca
 
 Histogram Log
 
-*** Paste Histogram Picture and log prices**
+<p align="center">
+  <img src="static\histogramlog.png" width="350" title="hover text">
+  <img src="static\logprices.png" width="350" title="hover text">
+</p>
 
 We also create a line plot of the log transformed data and can see the exponential growth seems diminished, but we still have a trend and seasonal elements.
 
@@ -118,9 +123,21 @@ Add two graphs showing bad predictions
 
 ### Prices
 
+<p align="center">
+  <img src="static\BTC_price_prediction2024.png" width="350" title="hover text">
+</p>
+
 ### Wallets
 
+<p align="center">
+  <img src="static\wallets.png" width="350" title="hover text">
+</p>
+
 ### Active Addresses
+
+<p align="center">
+  <img src="static\active_addressess.png" width="350" title="hover text">
+</p>
 
 ## Machine Learning Models 
 
