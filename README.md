@@ -160,7 +160,7 @@ Add two graphs showing bad predictions
 
 ## Prophet
 
-The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted.
+The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
 <pre><code>df_train = df[['date', 'price']]
 df_train = df_train.rename(columns = {"date":"ds", "price":"y"})
@@ -178,6 +178,27 @@ forecast = m.predict(future)
     }</code></pre>
 
 <pre><code>fig1 = m.plot(forecast)
+    }</code></pre>
+
+<pre><code># Create a data frame that lists dates from Oct - Dec 2017
+insample = pd.DataFrame(pd.date_range("2010-09-25", "2024-01-01", periods=92))
+
+# Change the column name
+insample.columns = ['ds']
+
+# in-sample prediction
+prediction = model.predict(insample)
+
+# Plot
+fig = model.plot(prediction, figsize=(10,5))
+ax = fig.gca()
+ax.set_title("BTC Prediction", size=20)
+ax.set_xlabel("Date", size=18)
+ax.set_ylabel("value", size=18)
+ax.tick_params(axis='y', labelsize=15)
+ax.tick_params(axis='x', rotation=45, labelsize=15)
+ax.set_xlim(pd.to_datetime(['2010-09-25', '2024-12-31'])) 
+plt.show();
     }</code></pre>
 	
 
