@@ -70,12 +70,13 @@ END;</code></pre>
 
 ## Formulas and Terminology
 
-<pre><code>df['Metcafe']=df['address']**2
+<pre><code>
+df['Metcafe']=df['address']**2
 df['value'] = df['Metcafe']/df['mined']
 df["value"] = df["value"].map("{:.2f}".format)
 df['value']=df['value'].astype("float")
 df['networkvalue'] = df["price"] - df["value"]
-    }</code></pre>
+</code></pre>
 
 ### Value = Metcalfe's law = (Active Addressess)^2
 
@@ -169,7 +170,8 @@ Add two graphs showing bad predictions
 
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
-<pre><code>df_train = df[['date', 'price']]
+<pre><code>
+df_train = df[['date', 'price']]
 df_train = df_train.rename(columns = {"date":"ds", "price":"y"})
 
 m = Prophet()
@@ -179,15 +181,12 @@ n_years =2
 period = n_years * 365
 future = m.make_future_dataframe(periods = period)
 forecast = m.predict(future)
-    }</code></pre>
 
-<pre><code>forecast[['ds', 'yhat', 'yhat_lower','yhat_upper']].tail()
-    }</code></pre>
+forecast[['ds', 'yhat', 'yhat_lower','yhat_upper']].tail()
 
-<pre><code>fig1 = m.plot(forecast)
-    }</code></pre>
+>fig1 = m.plot(forecast)
 
-<pre><code># Create a data frame that lists dates from Oct - Dec 2017
+# Create a data frame that lists dates from Oct - Dec 2017
 insample = pd.DataFrame(pd.date_range("2010-09-25", "2024-01-01", periods=92))
 
 # Change the column name
@@ -206,7 +205,7 @@ ax.tick_params(axis='y', labelsize=15)
 ax.tick_params(axis='x', rotation=45, labelsize=15)
 ax.set_xlim(pd.to_datetime(['2010-09-25', '2024-12-31'])) 
 plt.show();
-    }</code></pre>
+</code></pre>
 	
 
 
