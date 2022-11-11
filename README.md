@@ -102,8 +102,12 @@ Observations from a non-stationary time series show seasonal effects, trends, an
 
 Mean and Variance Test = non stationary, large differences in mean and variances.
 Data was split into two and ran mean and var tests.
+
+<pre><code>
+Mean and Var Test Linear
 mean1 = 230.57, mean2 = 16936.32
 variance1=61688.13, variance2=288670101.60
+</code></pre>
 
 Histogram Linear
 
@@ -124,9 +128,11 @@ Histogram Log
 
 We also create a line plot of the log transformed data and can see the exponential growth seems diminished, but we still have a trend and seasonal elements.
 
+<pre><code>
 Mean and Var Test Log
-mean1=3.963961, mean2=9.174585
+mean1 = 3.963961, mean2=9.174585
 variance1=5.856168, variance2=1.358006
+</code></pre>
 
 Augmented Dickey-Fuller Test
 
@@ -137,21 +143,26 @@ Alternate Hypothesis (H1): The null hypothesis is rejected; it suggests the time
 
 Linear ADF - Running the example prints the test statistic value of -1.769203. The more negative this statistic, the more likely we are to reject the null hypothesis (we have a stationary dataset). As part of the output, we get a look-up table to help determine the ADF statistic. We can see that our statistic value of  -1.769203 is greater than the value of -3.432 at 1%. This suggests that we cannot reject the null hypothesis with a significance level of less than 1%. Not rejecting the null hypothesis means that the process has unit root, and in turn that the time series is non stationary or does have time-dependent structure
 
+<pre><code>
 ADF Statistic: -1.769203
 p-value: 0.395855
 Critical Values:
 	1%: -3.432
 	5%: -2.862
-	10%: -2.567
-
+	10%: -2.567_test_split(X,
+   y, random_state=1, stratify=y)
+</code></pre>
 
 Log ADF - We can see that the value is larger than the critical values, again, meaning that we can fail to reject the null hypothesis and in turn that the time series is non-stationary.
 
+
+<pre><code>
 ADF Statistic: -3.182831
 p-value: 0.021000
 	1%: -3.432
 	5%: -2.862
 	10%: -2.567
+</code></pre>
 
 
 Preprocessing Conclusion: DATA IS NON STATIONARY - IT is time dependant
