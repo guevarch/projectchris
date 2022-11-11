@@ -14,12 +14,18 @@ The first step in the process is to find the data. The data sources included mar
 
 List Data Sources: 
 
-*** Add referencing ***
+Circulating Bitcoin: https://www.blockchain.com/explorer/charts/total-bitcoins
+Wallets: https://www.blockchain.com/explorer/charts/my-wallet-n-users
+Bitcoin Market Data: https://www.investing.com/crypto/bitcoin
+Active Addresses: https://studio.glassnode.com/metrics
+
 
 Next, is to create a database in PostgreSQL and create tables to house the csv data. A join function was used to combine two csv tables and psycopg2 was used to connect PostgreSQL to pandas dataframe. The new dataframe was further cleaned, cured and prepared for analysis and Prophet time series and supervised machine learning. 
 
+<p align="center">
+  <img src="static\ERD.png" width="350" title="hover text">
+</p>
 
-*** Add screenshots of sql ***
 
 # Results
 
