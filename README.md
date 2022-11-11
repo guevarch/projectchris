@@ -70,6 +70,13 @@ END;</code></pre>
 
 ## Formulas and Terminology
 
+<pre><code>df['Metcafe']=df['address']**2
+df['value'] = df['Metcafe']/df['mined']
+df["value"] = df["value"].map("{:.2f}".format)
+df['value']=df['value'].astype("float")
+df['networkvalue'] = df["price"] - df["value"]
+    }</code></pre>
+
 ### Value = Metcalfe's law = (Active Addressess)^2
 
 The value of a network is famously accredited to Bob Metcalfe, the inventor of Ethernet and founder of the computer networking company 3Com. Metcalfe’s Law states that a network’s value is proportional to the square of the number of its users. It also reveals when Bitcoin has been overvalued.  Wheatley and co point to four occasions when Bitcoin has become overvalued and then crashed; in other words, when the bubble has burst.
