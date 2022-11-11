@@ -160,6 +160,28 @@ Add two graphs showing bad predictions
 
 ## Prophet
 
+The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted.
+
+<pre><code>df_train = df[['date', 'price']]
+df_train = df_train.rename(columns = {"date":"ds", "price":"y"})
+
+m = Prophet()
+m.fit(df_train)
+
+n_years =2
+period = n_years * 365
+future = m.make_future_dataframe(periods = period)
+forecast = m.predict(future)
+    }</code></pre>
+
+<pre><code>forecast[['ds', 'yhat', 'yhat_lower','yhat_upper']].tail()
+    }</code></pre>
+
+<pre><code>fig1 = m.plot(forecast)
+    }</code></pre>
+	
+
+
 ### Prices
 
 <p align="center">
