@@ -144,12 +144,12 @@ Add two graphs showing bad predictions
 ### DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
 #### Train Split Data
 
-<code>
-    X_selected_train, X_selected_test, y_train, y_test = train_test_split(sel.transform(X), y, random_state=1)
-scaler = StandardScaler().fit(X_selected_train)
-X_selected_train_scaled = scaler.transform(X_selected_train)
-X_selected_test_scaled = scaler.transform(X_selected_test)
-</code>
+<p>This is the <code>Panel</code> constructor:</p>
+<pre><code>function Panel(element, canClose, closeHandler) {
+      this.element = element;
+      this.canClose = canClose;
+      this.closeHandler = function () { if (closeHandler) closeHandler() };
+    }</code></pre>
 
 ### classification_report for each and explanations with images
 
