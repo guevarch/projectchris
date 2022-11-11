@@ -6,6 +6,10 @@ On 3 January 2009, the bitcoin network was created when Nakamoto mined the start
 
 I chose this topic because I believe bitcoin is a tool for economic sovereignty, individual property rights and financial inclusion. We can see evidence of this in the adoption rates in emerging markets or developing nations.
 
+<p align="center">
+  <img src="static\developingnationsadoption.webp" width="350" title="hover text">
+</p>
+
 The first objective is to use the Prophet time series model to forecast price, active addresses and value(according to Metcafe’s Law) by 2024. The second objective is to determine if the current price is overvalued or undervalued compared to Metcafe’s Law of Network Adoptions. The supervised learning models used to model the data are DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
 
 # Method
@@ -14,17 +18,13 @@ The first step in the process is to find the data. The data sources included mar
 
 List Data Sources: 
 
-Circulating Bitcoin: https://www.blockchain.com/explorer/charts/total-bitcoins
-Wallets: https://www.blockchain.com/explorer/charts/my-wallet-n-users
-Bitcoin Market Data: https://www.investing.com/crypto/bitcoin
-Active Addresses: https://studio.glassnode.com/metrics
+- Circulating Bitcoin: https://www.blockchain.com/explorer/charts/total-bitcoins
+- Wallets: https://www.blockchain.com/explorer/charts/my-wallet-n-users
+- Bitcoin Market Data: https://www.investing.com/crypto/bitcoin
+- Active Addresses: https://studio.glassnode.com/metrics
 
 
 Next, is to create a database in PostgreSQL and create tables to house the csv data. A join function was used to combine two csv tables and psycopg2 was used to connect PostgreSQL to pandas dataframe. The new dataframe was further cleaned, cured and prepared for analysis and Prophet time series and supervised machine learning. 
-
-<p align="center">
-  <img src="static\ERD.png" width="350" title="hover text">
-</p>
 
 
 # Results
@@ -43,7 +43,7 @@ Moreover, the circulating supply of a cryptocurrency can be used for calculating
 
 ### Network Value = Value - Price
 
-*** Add explanations and referencing ***
+Network Value is simply subtracting the current value or Metcalfe's law by the current price.
 
 ## Preprocessing
 
@@ -142,6 +142,14 @@ Add two graphs showing bad predictions
 ## Machine Learning Models 
 
 ### DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
+#### Train Split Data
+
+<code>
+    X_selected_train, X_selected_test, y_train, y_test = train_test_split(sel.transform(X), y, random_state=1)
+scaler = StandardScaler().fit(X_selected_train)
+X_selected_train_scaled = scaler.transform(X_selected_train)
+X_selected_test_scaled = scaler.transform(X_selected_test)
+</code>
 
 ### classification_report for each and explanations with images
 
@@ -154,7 +162,7 @@ A quick thought experiment: lets assume a consistent halving supply issuance, ra
 *** project bitcoin projection table 2032 *** 
 *** show woobull bitcoin inflation rate *** 
 
-
+# Conclusion
 
 # References
 
