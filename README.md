@@ -231,13 +231,24 @@ plt.show();
 ## Machine Learning Models 
 
 ### DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
-#### Train Split Data
 
-<pre><code>function Panel(element, canClose, closeHandler) {
-      this.element = element;
-      this.canClose = canClose;
-      this.closeHandler = function () { if (closeHandler) closeHandler() };
-    }</code></pre>
+#### Preprocessing Data
+
+Creat New Column that indicates binary outcome - over/under valuation. Create targets - X all columns except date and status, and use get.dummies to convert categorical data into dummy or indicator variables. Then use train_test_split x,y data. Next is to classify into each model. Then use standardscaler to fit the x_train and x_test data 
+
+<pre><code>df['status'] = df['networkvalue'].apply(lambda x: '1' if x > 0 else '0')
+# Create our features
+X = df.drop(columns="status")
+X = pd.get_dummies(X)
+
+# Create our target
+X = df.drop(columns="date")
+y = df['status']
+
+X_train, X_test, y_train, y_test = train_test_split(X,
+   y, random_state=1, stratify=y)
+
+</code></pre>
 
 ### classification_report for each and explanations with images
 
