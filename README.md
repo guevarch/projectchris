@@ -144,7 +144,6 @@ Add two graphs showing bad predictions
 ### DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
 #### Train Split Data
 
-<p>This is the <code>Panel</code> constructor:</p>
 <pre><code>function Panel(element, canClose, closeHandler) {
       this.element = element;
       this.canClose = canClose;
