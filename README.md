@@ -213,19 +213,19 @@ plt.show();
 ### Prices
 
 <p align="center">
-  <img src="static\BTC_price_prediction2024.png" width="350" title="hover text">
+  <img src="static\BTC_price_prediction2024.png" width="650" title="hover text">
 </p>
 
 ### Wallets
 
 <p align="center">
-  <img src="static\wallets.png" width="350" title="hover text">
+  <img src="static\wallets.png" width="650" title="hover text">
 </p>
 
 ### Active Addresses
 
 <p align="center">
-  <img src="static\active_addressess.png" width="350" title="hover text">
+  <img src="static\active_addressess.png" width="650" title="hover text">
 </p>
 
 ## Machine Learning Models 
