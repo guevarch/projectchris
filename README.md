@@ -232,7 +232,7 @@ plt.show();
 
 ## Machine Learning Models 
 
-### DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
+### LogisticRegression, DecisionTreeClassifier, RandomForestClassifier and ExtraTreesClassifier.
 
 #### Preprocessing Data
 
@@ -254,7 +254,104 @@ X_train, X_test, y_train, y_test = train_test_split(X,
 
 </code></pre>
 
-### classification_report for each and explanations with images
+#### LogisticRegression
+
+<pre><code>
+LRclf = LogisticRegression().fit(X_train, y_train)
+y_pred = LRclf.predict(X_test)
+print(f'Training Score: {LRclf.score(X_train, y_train)}')
+print(f'Testing Score: {LRclf.score(X_test, y_test)}')
+print(classification_report(y_test, y_pred))
+balanced_accuracy_score(y_test, y_pred)
+
+Training Score: 0.939
+Testing Score: 0.936
+
+              precision    recall  f1-score   support
+
+           0       0.94      1.00      0.97      1233
+           1       0.00      0.00      0.00        83
+
+    accuracy                           0.94      1316
+   macro avg       0.47      0.50      0.48      1316
+weighted avg       0.88      0.94      0.91      1316
+
+Balanced Accuracy Score: 0.5
+</code></pre>
+
+#### DecisionTreeClassifier
+
+<pre><code>
+DTCclf = DecisionTreeClassifier().fit(X_train, y_train)
+y_pred = DTCclf.predict(X_test)
+print(f'Training Score: {DTCclf.score(X_train, y_train)}')
+print(f'Testing Score: {DTCclf.score(X_test, y_test)}')
+print(classification_report(y_test, y_pred)) 
+print(balanced_accuracy_score(y_test, y_pred))
+
+Training Score: 1.0
+Testing Score: 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1233
+           1       1.00      1.00      1.00        83
+
+    accuracy                           1.00      1316
+   macro avg       1.00      1.00      1.00      1316
+weighted avg       1.00      1.00      1.00      1316
+
+Balanced Accuracy Score: 1
+</code></pre>
+
+#### RandomForestClassifier
+
+<pre><code>
+RFCclf = RandomForestClassifier(random_state=1, n_estimators=3000).fit(X_train, y_train)
+y_pred = RFCclf.predict(X_test)
+print(f'Training Score: {RFCclf.score(X_train, y_train)}')
+print(f'Testing Score: {RFCclf.score(X_test, y_test)}')
+print(classification_report(y_test, y_pred)) 
+print(balanced_accuracy_score(y_test, y_pred))
+
+Training Score: 1.0
+Testing Score: 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1233
+           1       1.00      1.00      1.00        83
+
+    accuracy                           1.00      1316
+   macro avg       1.00      1.00      1.00      1316
+weighted avg       1.00      1.00      1.00      1316
+
+Balanced Accuracy Score: 1
+</code></pre>
+
+#### ExtraTreesClassifier
+
+<pre><code>
+RFCclf = ExtraTreesClassifier(random_state=1, n_estimators=3000).fit(X_train, y_train)
+y_pred = RFCclf.predict(X_test)
+print(f'Training Score: {RFCclf.score(X_train, y_train)}')
+print(f'Testing Score: {RFCclf.score(X_test, y_test)}')
+print(classification_report(y_test, y_pred)) 
+print(balanced_accuracy_score(y_test, y_pred))
+
+Training Score: 1.0
+Testing Score: 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1233
+           1       1.00      1.00      1.00        83
+
+    accuracy                           1.00      1316
+   macro avg       1.00      1.00      1.00      1316
+weighted avg       1.00      1.00      1.00      1316
+
+Balanced Accuracy Score: 1
+</code></pre>
+
+
 
 ## Additional Thougth Experiment
 
