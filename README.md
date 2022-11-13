@@ -223,26 +223,26 @@ plt.show();
 ### Prices
 
 <p align="center">
-  <img src="static\prices.png" width="650" title="hover text">
+  <img src="static\prices.png" width="300" title="hover text">
   
 </p>
 
 ### Wallets
 
 <p align="center">
-  <img src="static\wallets.png" width="650" title="hover text">
+  <img src="static\wallets.png" width="300" title="hover text">
 </p>
 
 ### Active Addresses
 
 <p align="center">
-  <img src="static\active_addressess.png" width="650" title="hover text">
+  <img src="static\active_addressess.png" width="300" title="hover text">
 </p>
 
 ### Value
 
 <p align="center">
-  <img src="static\value.png" width="650" title="hover text">
+  <img src="static\value.png" width="300" title="hover text">
 </p>
 
 ## Machine Learning Models 
