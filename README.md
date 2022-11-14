@@ -235,11 +235,11 @@ plt.show();
 
 ## Machine Learning Models 
 
-### LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
+### Binary Outcome using LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
 
 #### Preprocessing Data
 
-Creat New Column that indicates binary outcome - over/under valuation. Create targets - X all columns except date and status, and use get.dummies to convert categorical data into dummy or indicator variables. Then use train_test_split x,y data. Next is to classify into each model.
+Create New Column that indicates binary outcome - over/under valuation. Create targets - X all columns except date and status, and use get.dummies to convert categorical data into dummy or indicator variables. Then use train_test_split x,y data. Next is to classify into each model.
 
 <pre><code>
 # Create status column, 1 represents overvaluation, 0 representing undervaluation.
@@ -258,10 +258,6 @@ X_train, X_test, y_train, y_test = train_test_split(X,
 </code></pre>
 
 #### LogisticRegression
-
-Logistic regression predicts binary outcomes, meaning that there are only two possible outcomes. An example of logistic regression might be to decide, based on personal information, whether to approve a credit card application. Multiple variables, such as an applicant's age and income, are assessed to arrive at one of two answers: to approve or to deny the application.
-
-In other words, a logistic regression model analyzes the available data, and when presented with a new sample, mathematically determines its probability of belonging to a class. If the probability is above a certain cutoff point, the sample is assigned to that class. If the probability is less than the cutoff point, the sample is assigned to the other class.
 
 <pre><code>
 LRclf = LogisticRegression().fit(X_train, y_train)
@@ -388,6 +384,193 @@ Classification Report
     accuracy                           1.00      1097
    macro avg       1.00      1.00      1.00      1097
 weighted avg       1.00      1.00      1.00      1097
+
+</code></pre>
+
+
+### Trinary Outcome using LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
+
+#### Creating 50, 200, 300 and 400 Moving Averages
+
+<pre><code>
+# Creating 50, 200, 300 and 400 Moving Averages
+
+df['200D'] = df['price'].rolling(200).mean()
+df['300D'] = df['price'].rolling(300).mean()
+df['50D'] = df['price'].rolling(50).mean()
+df['400D'] = df['price'].rolling(400).mean()
+
+# Dropping any NaN
+df = df.dropna()
+
+# Finding mean of the four averages
+
+df['meanavge'] = (df['200D'] + df['300D'] + df['50D'] + df['400D'])/4
+
+# Cleaning the data and creating trinary outcome - 0 undervalued, 1 slightly overvalued, and 2 very overvalued.
+
+df = df.drop(columns=['200D','400D', '300D', '50D'])
+df['meanvalue'] = df["price"] - df["meanavge"]
+df['status'] = df['networkvalue'].apply(lambda x: '1' if x > 0 else '0')
+df['status1'] = df['meanvalue'].apply(lambda x: '1' if x > 0 else '0')
+df['status']=df['status'].astype("float")
+df['status1']=df['status1'].astype("float")
+df['statusfinal'] = df['status1'] + df['status']
+df = df.drop(columns=['status','status1'])
+df = df.rename(columns={"statusfinal": "status"})
+
+</code></pre>
+
+<pre><code>
+# Create status column, 1 represents overvaluation, 0 representing undervaluation.
+df['status'] = df['networkvalue'].apply(lambda x: '1' if x > 0 else '0')
+# Create our features
+X = df.drop(columns="status")
+X = pd.get_dummies(X)
+
+# Create our target
+X = df.drop(columns="date")
+y = df['status']
+
+X_train, X_test, y_train, y_test = train_test_split(X,
+   y, random_state=1, stratify=y)
+
+</code></pre>
+
+
+#### LogisticRegression
+
+<pre><code>
+LRclf = LogisticRegression().fit(X_train, y_train)
+y_pred = LRclf.predict(X_test)
+print(f'Training Score: {LRclf.score(X_train, y_train)}')
+print(f'Testing Score: {LRclf.score(X_test, y_test)}')
+print(classification_report(y_test, y_pred))
+balanced_accuracy_score(y_test, y_pred)
+
+Training Score: 0.6824372759856631
+Testing Score: 0.6641604010025063
+              precision    recall  f1-score   support
+
+         0.0       0.59      0.30      0.40       439
+         1.0       0.68      0.91      0.78       728
+         2.0       0.00      0.00      0.00        30
+
+    accuracy                           0.66      1197
+   macro avg       0.42      0.40      0.39      1197
+weighted avg       0.63      0.66      0.62      1197
+
+Balanced Accuracy Score: 0.403
+</code></pre>
+
+#### DecisionTreeClassifier
+
+<pre><code>
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=78)
+# Splitting into Train and Test sets into an 80/20 split.
+X_train2, X_test2, y_train2, y_test2 = train_test_split(X, y, random_state=78, train_size=0.80)
+# Creating a StandardScaler instance.
+scaler = StandardScaler()
+# Fitting the Standard Scaler with the training data.
+X_scaler = scaler.fit(X_train)
+
+# Scaling the data.
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Creating the decision tree classifier instance.
+model = tree.DecisionTreeClassifier()
+# Fitting the model.
+model = model.fit(X_train_scaled, y_train)
+
+# Making predictions using the testing data.
+predictions = model.predict(X_test_scaled)
+
+# Calculating the confusion matrix
+cm = confusion_matrix(y_test, predictions)
+
+# Create a DataFrame from the confusion matrix.
+cm_df = pd.DataFrame(
+    cm, index=["Actual 0", "Actual 1"], columns=["Predicted 0", "Predicted 1"])
+
+# Calculating the accuracy score.
+acc_score = accuracy_score(y_test, predictions)
+
+# Displaying results
+print("Confusion Matrix")
+display(cm_df)
+print(f"Accuracy Score : {acc_score}")
+print("Classification Report")
+print(classification_report(y_test, predictions))
+
+Confusion Matrix
+Predicted 0	Predicted 1	Predicted 2
+Actual 0	369	  0       0
+Actual 1	0	    601     0
+Actual 2	0	    0       27
+Accuracy Score : 1.0
+Classification Report
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00       369
+         1.0       1.00      1.00      1.00       601
+         2.0       1.00      1.00      1.00        27
+
+    accuracy                           1.00       997
+   macro avg       1.00      1.00      1.00       997
+weighted avg       1.00      1.00      1.00       997
+
+</code></pre>
+
+#### RandomForestClassifier
+
+<pre><code>
+from sklearn.ensemble import RandomForestClassifier
+# Creating a StandardScaler instance.
+scaler = StandardScaler()
+# Fitting the Standard Scaler with the training data.
+X_scaler = scaler.fit(X_train)
+
+# Scaling the data.
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Create a random forest classifier.
+rf_model = RandomForestClassifier(n_estimators=3000, random_state=78) 
+
+# Fitting the model
+rf_model = rf_model.fit(X_train_scaled, y_train)
+
+# Making predictions using the testing data.
+predictions = rf_model.predict(X_test_scaled)
+
+# Calculating the confusion matrix.
+cm = confusion_matrix(y_test, predictions)
+
+# Create a DataFrame from the confusion matrix.
+cm_df = pd.DataFrame(
+    cm, index=["Actual 0", "Actual 1"], columns=["Predicted 0", "Predicted 1"])
+
+# Calculating the accuracy score.
+acc_score = accuracy_score(y_test, predictions)
+
+Confusion Matrix
+Predicted 0	Predicted 1	Predicted 2
+Actual 0	369	  0	      0
+Actual 1	0   	601	    0
+Actual 2	0	    0	      27
+Accuracy Score : 1.0
+Classification Report
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00       369
+         1.0       1.00      1.00      1.00       601
+         2.0       1.00      1.00      1.00        27
+
+    accuracy                           1.00       997
+   macro avg       1.00      1.00      1.00       997
+weighted avg       1.00      1.00      1.00       997
+
 
 </code></pre>
 
