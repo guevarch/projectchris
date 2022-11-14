@@ -241,6 +241,8 @@ plt.show();
 
 
 <pre><code>
+# Create status column, 1 represents overvaluation, 0 representing undervaluation.
+df['status'] = df['networkvalue'].apply(lambda x: '1' if x > 0 else '0')
 # Create our features
 X = df.drop(columns="status")
 X = pd.get_dummies(X)
@@ -419,8 +421,6 @@ df = df.rename(columns={"statusfinal": "status"})
 </code></pre>
 
 <pre><code>
-# Create status column, 1 represents overvaluation, 0 representing undervaluation.
-df['status'] = df['networkvalue'].apply(lambda x: '1' if x > 0 else '0')
 # Create our features
 X = df.drop(columns="status")
 X = pd.get_dummies(X)
