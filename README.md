@@ -235,7 +235,7 @@ plt.show();
 
 ## Machine Learning Models 
 
-### LogisticRegression, DecisionTreeClassifier, RandomForestClassifier and ExtraTreesClassifier.
+### LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
 
 #### Preprocessing Data
 
@@ -258,6 +258,10 @@ X_train, X_test, y_train, y_test = train_test_split(X,
 </code></pre>
 
 #### LogisticRegression
+
+Logistic regression predicts binary outcomes, meaning that there are only two possible outcomes. An example of logistic regression might be to decide, based on personal information, whether to approve a credit card application. Multiple variables, such as an applicant's age and income, are assessed to arrive at one of two answers: to approve or to deny the application.
+
+In other words, a logistic regression model analyzes the available data, and when presented with a new sample, mathematically determines its probability of belonging to a class. If the probability is above a certain cutoff point, the sample is assigned to that class. If the probability is less than the cutoff point, the sample is assigned to the other class.
 
 <pre><code>
 LRclf = LogisticRegression().fit(X_train, y_train)
@@ -285,75 +289,107 @@ Balanced Accuracy Score: 0.5
 #### DecisionTreeClassifier
 
 <pre><code>
-DTCclf = DecisionTreeClassifier().fit(X_train, y_train)
-y_pred = DTCclf.predict(X_test)
-print(f'Training Score: {DTCclf.score(X_train, y_train)}')
-print(f'Testing Score: {DTCclf.score(X_test, y_test)}')
-print(classification_report(y_test, y_pred)) 
-print(balanced_accuracy_score(y_test, y_pred))
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=78)
+# Splitting into Train and Test sets into an 80/20 split.
+X_train2, X_test2, y_train2, y_test2 = train_test_split(X, y, random_state=78, train_size=0.80)
+# Creating a StandardScaler instance.
+scaler = StandardScaler()
+# Fitting the Standard Scaler with the training data.
+X_scaler = scaler.fit(X_train)
 
-Training Score: 1.0
-Testing Score: 1.0
+# Scaling the data.
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Creating the decision tree classifier instance.
+model = tree.DecisionTreeClassifier()
+# Fitting the model.
+model = model.fit(X_train_scaled, y_train)
+
+# Making predictions using the testing data.
+predictions = model.predict(X_test_scaled)
+
+# Calculating the confusion matrix
+cm = confusion_matrix(y_test, predictions)
+
+# Create a DataFrame from the confusion matrix.
+cm_df = pd.DataFrame(
+    cm, index=["Actual 0", "Actual 1"], columns=["Predicted 0", "Predicted 1"])
+
+# Calculating the accuracy score.
+acc_score = accuracy_score(y_test, predictions)
+
+# Displaying results
+print("Confusion Matrix")
+display(cm_df)
+print(f"Accuracy Score : {acc_score}")
+print("Classification Report")
+print(classification_report(y_test, predictions))
+
+Confusion Matrix
+Predicted 0	Predicted 1
+Actual 0	1035	0
+Actual 1	0	62
+Accuracy Score : 1.0
+Classification Report
               precision    recall  f1-score   support
 
-           0       1.00      1.00      1.00      1233
-           1       1.00      1.00      1.00        83
+           0       1.00      1.00      1.00      1035
+           1       1.00      1.00      1.00        62
 
-    accuracy                           1.00      1316
-   macro avg       1.00      1.00      1.00      1316
-weighted avg       1.00      1.00      1.00      1316
-
-Balanced Accuracy Score: 1
+    accuracy                           1.00      1097
+   macro avg       1.00      1.00      1.00      1097
+weighted avg       1.00      1.00      1.00      1097
 </code></pre>
 
 #### RandomForestClassifier
 
 <pre><code>
-RFCclf = RandomForestClassifier(random_state=1, n_estimators=3000).fit(X_train, y_train)
-y_pred = RFCclf.predict(X_test)
-print(f'Training Score: {RFCclf.score(X_train, y_train)}')
-print(f'Testing Score: {RFCclf.score(X_test, y_test)}')
-print(classification_report(y_test, y_pred)) 
-print(balanced_accuracy_score(y_test, y_pred))
+from sklearn.ensemble import RandomForestClassifier
+# Creating a StandardScaler instance.
+scaler = StandardScaler()
+# Fitting the Standard Scaler with the training data.
+X_scaler = scaler.fit(X_train)
 
-Training Score: 1.0
-Testing Score: 1.0
+# Scaling the data.
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Create a random forest classifier.
+rf_model = RandomForestClassifier(n_estimators=3000, random_state=78) 
+
+# Fitting the model
+rf_model = rf_model.fit(X_train_scaled, y_train)
+
+# Making predictions using the testing data.
+predictions = rf_model.predict(X_test_scaled)
+
+# Calculating the confusion matrix.
+cm = confusion_matrix(y_test, predictions)
+
+# Create a DataFrame from the confusion matrix.
+cm_df = pd.DataFrame(
+    cm, index=["Actual 0", "Actual 1"], columns=["Predicted 0", "Predicted 1"])
+
+# Calculating the accuracy score.
+acc_score = accuracy_score(y_test, predictions)
+
+Confusion Matrix
+Predicted 0	Predicted 1
+Actual 0	1035	0
+Actual 1	0	62
+Accuracy Score : 1.0
+Classification Report
               precision    recall  f1-score   support
 
-           0       1.00      1.00      1.00      1233
-           1       1.00      1.00      1.00        83
+           0       1.00      1.00      1.00      1035
+           1       1.00      1.00      1.00        62
 
-    accuracy                           1.00      1316
-   macro avg       1.00      1.00      1.00      1316
-weighted avg       1.00      1.00      1.00      1316
+    accuracy                           1.00      1097
+   macro avg       1.00      1.00      1.00      1097
+weighted avg       1.00      1.00      1.00      1097
 
-Balanced Accuracy Score: 1
 </code></pre>
-
-#### ExtraTreesClassifier
-
-<pre><code>
-RFCclf = ExtraTreesClassifier(random_state=1, n_estimators=3000).fit(X_train, y_train)
-y_pred = RFCclf.predict(X_test)
-print(f'Training Score: {RFCclf.score(X_train, y_train)}')
-print(f'Testing Score: {RFCclf.score(X_test, y_test)}')
-print(classification_report(y_test, y_pred)) 
-print(balanced_accuracy_score(y_test, y_pred))
-
-Training Score: 1.0
-Testing Score: 1.0
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00      1233
-           1       1.00      1.00      1.00        83
-
-    accuracy                           1.00      1316
-   macro avg       1.00      1.00      1.00      1316
-weighted avg       1.00      1.00      1.00      1316
-
-Balanced Accuracy Score: 1
-</code></pre>
-
 
 
 ## Additional Thougth Experiment
