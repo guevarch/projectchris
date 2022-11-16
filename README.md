@@ -81,7 +81,7 @@ df['value']=df['value'].astype("float")
 df['networkvalue'] = df["price"] - df["value"]
 </code></pre>
 
-### Value = Metcalfe's law = (Active Addressess)^2
+### Value = Metcafe's law = (Active Addressess)^2
 
 The value of a network is famously accredited to Bob Metcalfe, the inventor of Ethernet and founder of the computer networking company 3Com. Metcalfe’s Law states that a network’s value is proportional to the square of the number of its users. It also reveals when Bitcoin has been overvalued.  Wheatley and co point to four occasions when Bitcoin has become overvalued and then crashed; in other words, when the bubble has burst.
 
@@ -572,14 +572,6 @@ weighted avg       1.00      1.00      1.00       997
 </code></pre>
 
 
-## Additional Thougth Experiment
-
-Bitcoin’s supply is capped at 21 million and currently it is at 19,201,975 coins right now and it is estimated that 4-6 million coins are permanently lost. According to analysis, 85.14% of existing bitcoins have not been transferred or sold for more than three months. Mathematically, if the denominator is fixed, and the numerator is the only variable that can substantially change - ultimately value of the network can only increase. At 800k active addresses and 84M wallets, there is a lot more room to grow.
-
-A quick thought experiment: lets assume a consistent halving supply issuance, ratio of 82 wallets/active addresses, and assume 30% increase in adoption per year.
-
-*** project bitcoin projection table 2032 *** 
-*** show woobull bitcoin inflation rate *** 
 
 # Conclusion
 
