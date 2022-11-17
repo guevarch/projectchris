@@ -5,12 +5,68 @@
     <link rel = stylesheet href="style.css" />
 </head>
 <body>
-    <div class="jumbotron bg-warning">
-        <h1 class="display-4">Bitcoin Project</h1>
-        <p class="lead">
-            <b> Bitcoin Network Value Analysis by Chris Guevara </b>
+    <div class="jumbotron">
         <img src="../static/btc2.png" width="150" alt="btc2" />
-        </p>
+        <h1 class="display-1">Bitcoin Project</h1>
+        <p class="lead">By Chris Guevara.</p>
+        <hr class="my-4">
+        <h3 class="display-10">Bitcoin Price analysis using Prophet and Arima Model. Bitcoin Classification analysis using supervised machine learning.</h3>
+    </div>
+    
+      <div style="background: ghostwhite; 
+      font-size: 30px; 
+      padding: 10px; 
+      border: 1px solid lightgray; 
+      margin: 10px;">
+        
+
+        <pre><code>
+        LOGISTIC REGRESSION
+
+            Confusion Matrix
+                        Predicted 0	Predicted 1
+            Actual 0	    1242	0
+            Actual 1	    74	        0
+            Training Score: 0.9368
+            Testing Score: 0.9437
+                          precision    recall  f1-score   support
+            
+                       0       0.94      1.00      0.97      1242
+                       1       0.00      0.00      0.00        74
+            
+                accuracy                           0.94      1316
+               macro avg       0.47      0.50      0.49      1316
+            weighted avg       0.89      0.94      0.92      1316
+            
+            Balanced Accuracy Score = 0.5
+            Accuracy Score = 0.94376
+        
+        </code></pre>
+
+        <pre><code>
+            LOGISTIC REGRESSION - Oversampling Using RandomOverSampler
+    
+            Confusion Matrix
+                        Predicted 0	Predicted 1
+            Actual 0	    0	            1242
+            Actual 1	    0	            74
+            
+            Training Score: 0.5
+            Testing Score: 0.05623
+
+            Imbalanced Classification Report
+                               pre       rec       spe        f1       geo       iba       sup
+            
+                      0       0.00      0.00      1.00      0.00      0.00      0.00      1242
+                      1       0.06      1.00      0.00      0.11      0.00      0.00        74
+            
+            avg / total       0.00      0.06      0.94      0.01      0.00      0.00      1316
+            
+            Balanced Accuracy Score = 0.5
+            Accuracy Score = 0.056
+            </code></pre>
+        </div>
+                
     </div>
         <h1>Bitcoin Active Address Prediction using Prophet Model - 2024</h1>
         <left><iframe src="../static/active_addressess.html" height="600" width="1450" title="Iframe Example"></iframe></left>\
