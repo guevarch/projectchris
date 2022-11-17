@@ -135,51 +135,15 @@ Prophet does not perform well on non-stationary data because it is difficult to 
 
 Price prediction is very difficult to begin with. If we had working prediction models, then we would all be amazing stock pickers and billionaires. Nonetheless, the model does incredibly poor in predicting prices. The forecasts upper/lower bound are very off from the actual price.
 
-Add two graphs showing bad predictions
 
-*** Paste two different timelines with different predictions**
+
+
 
 ## Prophet
 
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
-<pre><code>
-df_train = df[['date', 'price']]
-df_train = df_train.rename(columns = {"date":"ds", "price":"y"})
 
-m = Prophet()
-m.fit(df_train)
-
-n_years =2
-period = n_years * 365
-future = m.make_future_dataframe(periods = period)
-forecast = m.predict(future)
-
-forecast[['ds', 'yhat', 'yhat_lower','yhat_upper']].tail()
-
->fig1 = m.plot(forecast)
-
-# Create a data frame that lists dates from Oct - Dec 2017
-insample = pd.DataFrame(pd.date_range("2010-09-25", "2024-01-01", periods=92))
-
-# Change the column name
-insample.columns = ['ds']
-
-# in-sample prediction
-prediction = model.predict(insample)
-
-# Plot
-fig = model.plot(prediction, figsize=(10,5))
-ax = fig.gca()
-ax.set_title("BTC Prediction", size=20)
-ax.set_xlabel("Date", size=18)
-ax.set_ylabel("value", size=18)
-ax.tick_params(axis='y', labelsize=15)
-ax.tick_params(axis='x', rotation=45, labelsize=15)
-ax.set_xlim(pd.to_datetime(['2010-09-25', '2024-12-31'])) 
-plt.show();
-</code></pre>
-	
 
 
 ### Prices, Wallets, Active Addresses and Value
@@ -196,123 +160,94 @@ plt.show();
 ### Binary Outcome Valuating against Metcalfes's Law LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
 
 #### LogisticRegression
-
 <pre><code>
-Training Score: 0.939
-Testing Score: 0.936
+LOGISTIC REGRESSION
 
-              precision    recall  f1-score   support
+            Confusion Matrix
+                        Predicted 0	Predicted 1
+            Actual 0	    1242	0
+            Actual 1	    74	        0
+            Training Score: 0.9368
+            Testing Score: 0.9437
+                          precision    recall  f1-score   support
+            
+                       0       0.94      1.00      0.97      1242
+                       1       0.00      0.00      0.00        74
+            
+                accuracy                           0.94      1316
+               macro avg       0.47      0.50      0.49      1316
+            weighted avg       0.89      0.94      0.92      1316
+            
+            Balanced Accuracy Score = 0.5
+            Accuracy Score = 0.94376
+        
+     
+        LOGISTIC REGRESSION - Oversampling Using RandomOverSampler
+    
+            Confusion Matrix
+                        Predicted 0	Predicted 1
+            Actual 0	    0	            1242
+            Actual 1	    0	            74
+            
+            Training Score: 0.5
+            Testing Score: 0.05623
 
-           0       0.94      1.00      0.97      1233
-           1       0.00      0.00      0.00        83
+            Imbalanced Classification Report
+                               pre       rec       spe        f1       geo       iba       sup
+            
+                      0       0.00      0.00      1.00      0.00      0.00      0.00      1242
+                      1       0.06      1.00      0.00      0.11      0.00      0.00        74
+            
+            avg / total       0.00      0.06      0.94      0.01      0.00      0.00      1316
+            
+            Balanced Accuracy Score = 0.5
+            Accuracy Score = 0.056
 
-    accuracy                           0.94      1316
-   macro avg       0.47      0.50      0.48      1316
-weighted avg       0.88      0.94      0.91      1316
+        LOGISTIC REGRESSION - Undersampling Using ClusterCentroids
+    
+            Confusion Matrix
+   
+                        Predicted 0	Predicted 1
+            Actual 0	    1046	    196
+            Actual 1	    34	            40
+            
+            Training Score: 0.770
+            Testing Score: 0.825
 
-Balanced Accuracy Score: 0.5
+            Imbalanced Classification Report
+            pre       rec       spe        f1       geo       iba       sup
+
+            0       0.97      0.84      0.54      0.90      0.67      0.47      1242
+            1       0.17      0.54      0.84      0.26      0.67      0.44        74
+
+            avg / total       0.92      0.83      0.56      0.86      0.67      0.47      1316
+            
+            Balanced Accuracy Score = 0.6913
+            Accuracy Score = 0.8252
+
+
+
+        LOGISTIC REGRESSION - Over and Under sampling using SMOTEENN
+    
+            Training Score: 0.6774
+            Testing Score: 0.8199
+            
+            Confusion Matrix
+                        Predicted 0	Predicted 1
+            Actual 0	    1037	    205
+            Actual 1	    32	            42
+            Balanced Accuracy Score = 0.7012
+            Accuracy Score = 0.8199
+            
+            Imbalanced Classification Report
+                            pre       rec       spe        f1       geo       iba       sup
+            
+                    0       0.97      0.83      0.57      0.90      0.69      0.49      1242
+                    1       0.17      0.57      0.83      0.26      0.69      0.46        74
+            
+            avg / total       0.93      0.82      0.58      0.86      0.69      0.49      1316
+        
 </code></pre>
-
-#### DecisionTreeClassifier
-
-<pre><code>
-Confusion Matrix
-Predicted 0	Predicted 1
-Actual 0	1035	0
-Actual 1	0	62
-Accuracy Score : 1.0
-Classification Report
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00      1035
-           1       1.00      1.00      1.00        62
-
-    accuracy                           1.00      1097
-   macro avg       1.00      1.00      1.00      1097
-weighted avg       1.00      1.00      1.00      1097
-</code></pre>
-
-#### RandomForestClassifier
-
-<pre><code>
-Confusion Matrix
-          Predicted 0	Predicted 1
-Actual 0	    1035	    0
-Actual 1	       0	    62
-Accuracy Score : 1.0
-Classification Report
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00      1035
-           1       1.00      1.00      1.00        62
-
-    accuracy                           1.00      1097
-   macro avg       1.00      1.00      1.00      1097
-weighted avg       1.00      1.00      1.00      1097
-
-</code></pre>
-
-
-### Binary Outcome using moving averages valuation LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
-
-
-#### LogisticRegression
-
-<pre><code>
-Training Score: 0.613
-Testing Score: 0.592
-              precision    recall  f1-score   support
-
-         0.0       0.00      0.00      0.00       500
-         1.0       0.59      1.00      0.74       727
-
-    accuracy                           0.59      1227
-   macro avg       0.30      0.50      0.37      1227
-weighted avg       0.35      0.59      0.44      1227
-
-Balanced Accuracy Score 0.5
-
-</code></pre>
-
-#### DecisionTreeClassifier
-
-<pre><code>
-Confusion Matrix
-          Predicted 0	Predicted 1
-Actual 0	  416       	0
-Actual 1	  0	          606
-Accuracy Score : 1.0
-Classification Report
-              precision    recall  f1-score   support
-
-         0.0       1.00      1.00      1.00       416
-         1.0       1.00      1.00      1.00       606
-
-    accuracy                           1.00      1022
-   macro avg       1.00      1.00      1.00      1022
-weighted avg       1.00      1.00      1.00      1022
-</code></pre>
-
-#### RandomForestClassifier
-
-<pre><code>
-Confusion Matrix
-          Predicted 0	Predicted 1
-Actual 0	  416	      0
-Actual 1	  0	        606
-Accuracy Score : 1.0
-Classification Report
-              precision    recall  f1-score   support
-
-         0.0       1.00      1.00      1.00       416
-         1.0       1.00      1.00      1.00       606
-
-    accuracy                           1.00      1022
-   macro avg       1.00      1.00      1.00      1022
-weighted avg       1.00      1.00      1.00      1022
-
-</code></pre>
-
 
 
 # Conclusion

@@ -5,22 +5,22 @@
     <link rel = stylesheet href="style.css" />
 </head>
 <body>
-    <div class="jumbotron">
+    <div class="jumbotron bg-warning">
         <img src="../static/btc2.png" width="150" alt="btc2" />
         <h1 class="display-1">Bitcoin Project</h1>
         <p class="lead">By Chris Guevara.</p>
         <hr class="my-4">
+        
         <h3 class="display-10">Bitcoin Price analysis using Prophet and Arima Model. Bitcoin Classification analysis using supervised machine learning.</h3>
     </div>
     
-      <div style="background: ghostwhite; 
-      font-size: 30px; 
+      <div style="background: whitesmoke; 
+      font-size: 20px; 
       padding: 10px; 
-      border: 1px solid lightgray; 
-      margin: 10px;">
-        
+      border: 10px solid orange; 
+      margin: 25px;">
 
-        <pre><code>
+    <pre><code>
         LOGISTIC REGRESSION
 
             Confusion Matrix
@@ -41,10 +41,8 @@
             Balanced Accuracy Score = 0.5
             Accuracy Score = 0.94376
         
-        </code></pre>
-
-        <pre><code>
-            LOGISTIC REGRESSION - Oversampling Using RandomOverSampler
+     
+        LOGISTIC REGRESSION - Oversampling Using RandomOverSampler
     
             Confusion Matrix
                         Predicted 0	Predicted 1
@@ -64,22 +62,68 @@
             
             Balanced Accuracy Score = 0.5
             Accuracy Score = 0.056
-            </code></pre>
+
+        LOGISTIC REGRESSION - Undersampling Using ClusterCentroids
+    
+            Confusion Matrix
+   
+                        Predicted 0	Predicted 1
+            Actual 0	    1046	    196
+            Actual 1	    34	            40
+            
+            Training Score: 0.770
+            Testing Score: 0.825
+
+            Imbalanced Classification Report
+            pre       rec       spe        f1       geo       iba       sup
+
+            0       0.97      0.84      0.54      0.90      0.67      0.47      1242
+            1       0.17      0.54      0.84      0.26      0.67      0.44        74
+
+            avg / total       0.92      0.83      0.56      0.86      0.67      0.47      1316
+            
+            Balanced Accuracy Score = 0.6913
+            Accuracy Score = 0.8252
+
+
+
+        LOGISTIC REGRESSION - Over and Under sampling using SMOTEENN
+    
+            Training Score: 0.6774
+            Testing Score: 0.8199
+            
+            Confusion Matrix
+                        Predicted 0	Predicted 1
+            Actual 0	    1037	    205
+            Actual 1	    32	            42
+            Balanced Accuracy Score = 0.7012
+            Accuracy Score = 0.8199
+            
+            Imbalanced Classification Report
+                            pre       rec       spe        f1       geo       iba       sup
+            
+                    0       0.97      0.83      0.57      0.90      0.69      0.49      1242
+                    1       0.17      0.57      0.83      0.26      0.69      0.46        74
+            
+            avg / total       0.93      0.82      0.58      0.86      0.69      0.49      1316
+        
+        </code></pre>
+
+        
+    
+            <center><h1>Bitcoin Active Address Prediction using Prophet Model - 2024</h1>
+            <iframe src="../static/active_addressess.html" height="600" width="1450" title="Iframe Example"></iframe></left>\
+            <h1>Bitcoin Value Prediction using Prophet Model - 2024</h1>
+            <center><iframe src="../static/value.html" height="600" width="1450" title="Iframe Example"></iframe></left>
+            <h1>Bitcoin Price Prediction using Prophet Model - 2024</h1>
+            <center><iframe src="../static/prices.html" height="600" width="1451" title="Iframe Example"></iframe></left>
+            <h1>Bitcoin Wallets Prediction using Prophet Model - 2024</h1>
+            <center><iframe src="../static/wallets.html" height="600" width="1451" title="Iframe Example"></iframe>
+            <h1>Bitcoin status - 2024</h1>
+            <center><iframe src="../static/status.html" height="600" width="1451" title="Iframe Example"></iframe>
+      
         </div>
                 
-    </div>
-        <h1>Bitcoin Active Address Prediction using Prophet Model - 2024</h1>
-        <left><iframe src="../static/active_addressess.html" height="600" width="1450" title="Iframe Example"></iframe></left>\
-        <h1>Bitcoin Value Prediction using Prophet Model - 2024</h1>
-        <left><iframe src="../static/value.html" height="600" width="1450" title="Iframe Example"></iframe></left>
-        <h1>Bitcoin Price Prediction using Prophet Model - 2024</h1>
-        <left><iframe src="../static/prices.html" height="600" width="1451" title="Iframe Example"></iframe></left>
-        <h1>Bitcoin Wallets Prediction using Prophet Model - 2024</h1>
-        <left><iframe src="../static/wallets.html" height="600" width="1451" title="Iframe Example"></iframe>
-        <h1>Bitcoin status - 2024</h1>
-        <left><iframe src="../static/status.html" height="600" width="1451" title="Iframe Example"></iframe>
-      </div>
-
  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
