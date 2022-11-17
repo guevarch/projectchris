@@ -153,7 +153,7 @@ The process for prophet is to create a df_train, fitting it into a prophet model
 
 ## Machine Learning Models 
 
-### Binary Outcome Valuating against Metcalfes's Law LogisticRegression, DecisionTreeClassifier, and RandomForestClassifier.
+### Binary Outcome using Logistic Regression on Price. Used Oversampling, undersampling and smoteenn method. 
 
 #### LogisticRegression
 <pre><code>
