@@ -135,10 +135,6 @@ Prophet does not perform well on non-stationary data because it is difficult to 
 
 Price prediction is very difficult to begin with. If we had working prediction models, then we would all be amazing stock pickers and billionaires. Nonetheless, the model does incredibly poor in predicting prices. The forecasts upper/lower bound are very off from the actual price.
 
-
-
-
-
 ## Prophet
 
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
