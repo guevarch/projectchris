@@ -140,108 +140,95 @@ Price prediction is very difficult to begin with. If we had working prediction m
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
 
-
-
-### Prices, Wallets, Active Addresses and Value
+### Results LogPrices, Linear Prices and Value
 
 <p align="center">
   <img src="static\prices.png" width="400" title="hover text">
-  <img src="static\active_addressess.png" width="400" title="hover text">
-  <img src="static\value.png" width="400" title="hover text"> 
+  <img src="static\logprices.png" width="400" title="hover text">
+  <img src="static\value.png" width="400" title="hover text">
 </p>
 
+#### Linear
+r2_score
+mean_squared_error
+mean_absolute_error
 
-## Machine Learning Models 
+#### LogPrices
+r2_score
+mean_squared_error
+mean_absolute_error
 
-### Binary Outcome using Logistic Regression on Price. Used Oversampling, undersampling and smoteenn method. 
+#### Value
+r2_score
+mean_squared_error
+mean_absolute_error
+
+
+## Machine Learning Model Using Value(Metcalfe's Law) Classification: Logistic Regression, Resampling Using Smoteenn.  
+
+### Hyperparameter Tuning
 
 #### LogisticRegression
+
+Why I chose this model
+Weaknesses and Strengths
+Accuracy Score
+Confusion Matrix
+Balanced Accuracy Score
+Training Score
+Testing Score
+
+#### LogisticRegression with Smoteenn
+
+Why I chose this model
+Weaknesses and Strengths
+Accuracy Score
+Confusion Matrix
+Balanced Accuracy Score
+Training Score
+Testing Score
+
+## Machine Learning Model Using Moving Average Classification: Logistic Regression, Resampling Using Smoteenn.  
+
+### Hyperparameter Tuning
+
+#### LogisticRegression
+
+Why I chose this model
+Weaknesses and Strengths
+Accuracy Score
+Confusion Matrix
+Balanced Accuracy Score
+Training Score
+Testing Score
+
+#### LogisticRegression with Smoteenn
+
+Why I chose this model
+Weaknesses and Strengths
+Accuracy Score
+Confusion Matrix
+Balanced Accuracy Score
+Training Score
+Testing Score
+
+## BONUS Machine Learning Model Using KERAS Buy Zones.  
+
+### KERAS 
+
+Why I chose this model
+Weaknesses and Strengths
+Accuracy Score
+Loss
+
+#### Optimizing Model
+
+Why I chose this model
+Weaknesses and Strengths
+Accuracy Score
+Loss
+
 <pre><code>
-LOGISTIC REGRESSION
-
-            Confusion Matrix
-                        Predicted 0	Predicted 1
-            Actual 0	    1242	0
-            Actual 1	    74	        0
-            Training Score: 0.9368
-            Testing Score: 0.9437
-                          precision    recall  f1-score   support
-            
-                       0       0.94      1.00      0.97      1242
-                       1       0.00      0.00      0.00        74
-            
-                accuracy                           0.94      1316
-               macro avg       0.47      0.50      0.49      1316
-            weighted avg       0.89      0.94      0.92      1316
-            
-            Balanced Accuracy Score = 0.5
-            Accuracy Score = 0.94376
-        
-     
-        LOGISTIC REGRESSION - Oversampling Using RandomOverSampler
-    
-            Confusion Matrix
-                        Predicted 0	Predicted 1
-            Actual 0	    0	            1242
-            Actual 1	    0	            74
-            
-            Training Score: 0.5
-            Testing Score: 0.05623
-
-            Imbalanced Classification Report
-                               pre       rec       spe        f1       geo       iba       sup
-            
-                      0       0.00      0.00      1.00      0.00      0.00      0.00      1242
-                      1       0.06      1.00      0.00      0.11      0.00      0.00        74
-            
-            avg / total       0.00      0.06      0.94      0.01      0.00      0.00      1316
-            
-            Balanced Accuracy Score = 0.5
-            Accuracy Score = 0.056
-
-        LOGISTIC REGRESSION - Undersampling Using ClusterCentroids
-    
-            Confusion Matrix
-   
-                        Predicted 0	Predicted 1
-            Actual 0	    1046	    196
-            Actual 1	    34	            40
-            
-            Training Score: 0.770
-            Testing Score: 0.825
-
-            Imbalanced Classification Report
-            pre       rec       spe        f1       geo       iba       sup
-
-            0       0.97      0.84      0.54      0.90      0.67      0.47      1242
-            1       0.17      0.54      0.84      0.26      0.67      0.44        74
-
-            avg / total       0.92      0.83      0.56      0.86      0.67      0.47      1316
-            
-            Balanced Accuracy Score = 0.6913
-            Accuracy Score = 0.8252
-
-
-
-        LOGISTIC REGRESSION - Over and Under sampling using SMOTEENN
-    
-            Training Score: 0.6774
-            Testing Score: 0.8199
-            
-            Confusion Matrix
-                        Predicted 0	Predicted 1
-            Actual 0	    1037	    205
-            Actual 1	    32	            42
-            Balanced Accuracy Score = 0.7012
-            Accuracy Score = 0.8199
-            
-            Imbalanced Classification Report
-                            pre       rec       spe        f1       geo       iba       sup
-            
-                    0       0.97      0.83      0.57      0.90      0.69      0.49      1242
-                    1       0.17      0.57      0.83      0.26      0.69      0.46        74
-            
-            avg / total       0.93      0.82      0.58      0.86      0.69      0.49      1316
         
 </code></pre>
 
