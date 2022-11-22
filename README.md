@@ -85,7 +85,7 @@ Histogram Log
 
 <p align="center">
   <img src="static\histogramlog.png" width="350" title="hover text">
-  <img src="static\logprices.png" width="350" title="hover text">
+
 </p>
 
 We also create a line plot of the log transformed data and can see the exponential growth seems diminished, but we still have a trend and seasonal elements.
@@ -148,36 +148,45 @@ The process for prophet is to create a df_train, fitting it into a prophet model
   <img src="static\value.png" width="400" title="hover text">
 </p>
 
-#### Linear
-r2_score
-mean_squared_error
-mean_absolute_error
+<pre><code>
+Linear
+r2_score = 0.7455
+mean_squared_error = 54484853.20
+mean_absolute_error = 4327.36
 
-#### LogPrices
-r2_score
-mean_squared_error
-mean_absolute_error
+LogPrices
+r2_score = 0.9866
+mean_squared_error =  0.1390
+mean_absolute_error = 0.2809
 
-#### Value
-r2_score
-mean_squared_error
-mean_absolute_error
+Value
+r2_score = 0.851
+mean_squared_error = 66431291.56
+mean_absolute_error = 5279.58
 
+</code></pre>
 
 ## Machine Learning Model Using Value(Metcalfe's Law) Classification: Logistic Regression, Resampling Using Smoteenn.  
 
 ### Hyperparameter Tuning
 
+<pre><code>
+Best: 0.948246 using {'C': 10, 'penalty': 'l2', 'solver': 'newton-cg'}
+</code></pre>
 #### LogisticRegression
 
 Why I chose this model
 Weaknesses and Strengths
+
+<pre><code>
+
 Accuracy Score
 Confusion Matrix
 Balanced Accuracy Score
 Training Score
 Testing Score
 
+</code></pre>
 #### LogisticRegression with Smoteenn
 
 Why I chose this model
