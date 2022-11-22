@@ -160,9 +160,9 @@ mean_squared_error =  0.1390
 mean_absolute_error = 0.2809
 
 Value
-r2_score = 0.851
-mean_squared_error = 66431291.56
-mean_absolute_error = 5279.58
+r2_score = 0.988
+mean_squared_error = 0.115
+mean_absolute_error = 0.249
 
 </code></pre>
 
