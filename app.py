@@ -1,8 +1,6 @@
 from flask import Flask, redirect, render_template
 import numpy as np
-import pandas as pd
-import joblib
-import requests,
+import requests
 from prophet import Prophet
 
 app = Flask(__name__)
