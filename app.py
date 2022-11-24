@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import numpy as np
 import pandas as pd
 import joblib
-import request
+import requests
 from prophet import Prophet
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ app = Flask(__name__)
 def main():
     
     # If a form is submitted
-    if request.method == "POST":
+    if requests.method == "POST":
         
         df = pd.read_csv("Resources/mldata.csv")
 
@@ -23,8 +23,8 @@ def main():
         model.fit(df)
 
         # # Get values through input bars
-        start = request.form.get("start")
-        end = request.form.get("end")    
+        start = requests.form.get("start")
+        end = requests.form.get("end")    
 
         insample = pd.DataFrame(pd.date_range(start, end, periods=92))
         insample.columns = ['ds']
