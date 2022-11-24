@@ -127,20 +127,14 @@ p-value: 0.021000
 </code></pre>
 
 
-Preprocessing Conclusion: DATA IS NON STATIONARY - IT is time dependant
-
-A stationary time series is one whose statistical properties do not depend on the time at which the series is observed.15 Thus, time series with trends, or with seasonality, are not stationary — the trend and seasonality will affect the value of the time series at different times. On the other hand, a white noise series is stationary — it does not matter when you observe it, it should look much the same at any point in time.
-
-Prophet does not perform well on non-stationary data because it is difficult to find the actual seasonality and trend of the data if the patterns are inconsistent.
-
-Price prediction is very difficult to begin with. If we had working prediction models, then we would all be amazing stock pickers and billionaires. Nonetheless, the model does incredibly poor in predicting prices. The forecasts upper/lower bound are very off from the actual price.
-
 ## Prophet
+
+Prophet is specifically designed for business time series prediction. It achieves very good results for the stock data but, speaking from anecdotes, it can fail spectacularly on time series datasets from other domains. In particular, this holds for time series where the notion of calendar date is not applicable and we cannot learn any seasonal patterns. Prophet’s advantage is that it requires less hyperparameter tuning as it is specifically designed to detect patterns in business time series.
 
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
 
-### Results LogPrices, Linear Prices and Value
+### Results LogPrices and Value
 
 <p align="center">
   <img src="static\prices.png" width="400" title="hover text">
@@ -149,15 +143,16 @@ The process for prophet is to create a df_train, fitting it into a prophet model
 </p>
 
 <pre><code>
-Linear
-r2_score = 0.7455
-mean_squared_error = 54484853.20
-mean_absolute_error = 4327.36
-
 LogPrices
 r2_score = 0.9866
 mean_squared_error =  0.1390
 mean_absolute_error = 0.2809
+
+Linear Prices 
+r2_score = 0.7455
+mean_squared_error =  54484853.20
+mean_absolute_error = 4327.367
+
 
 Value
 r2_score = 0.988
@@ -180,46 +175,66 @@ Weaknesses and Strengths
 
 <pre><code>
 
-Accuracy Score
 Confusion Matrix
-Balanced Accuracy Score
-Training Score
-Testing Score
+          Predicted 0	Predicted 1
+Actual 0	  1234	      8
+Actual 1	    57	      17
 
+Training Score: 0.952
+Testing Score: 0.950
+
+              precision    recall  f1-score   support
+
+           0       0.96      0.99      0.97      1242
+           1       0.68      0.23      0.34        74
+
+    accuracy                           0.95      1316
+   macro avg       0.82      0.61      0.66      1316
+weighted avg       0.94      0.95      0.94      1316
+
+balanced_accuracy_score: 0.6116
+accuracy_score: 0.950
+        
 </code></pre>
-#### LogisticRegression with Smoteenn
 
-Why I chose this model
-Weaknesses and Strengths
-Accuracy Score
-Confusion Matrix
-Balanced Accuracy Score
-Training Score
-Testing Score
 
-## Machine Learning Model Using Moving Average Classification: Logistic Regression, Resampling Using Smoteenn.  
+## Machine Learning Model Using Moving Average Classification: Logistic Regression
 
 ### Hyperparameter Tuning
+
+<pre><code>
+Best: 0.722371 using {'C': 1.0, 'penalty': 'l2', 'solver': 'newton-cg'}
+</code></pre>
 
 #### LogisticRegression
 
 Why I chose this model
 Weaknesses and Strengths
-Accuracy Score
-Confusion Matrix
-Balanced Accuracy Score
-Training Score
-Testing Score
 
-#### LogisticRegression with Smoteenn
+<pre><code>
 
-Why I chose this model
-Weaknesses and Strengths
-Accuracy Score
 Confusion Matrix
-Balanced Accuracy Score
-Training Score
-Testing Score
+          Predicted 0	Predicted 1
+Actual 0	  191	        285
+Actual 1	    41	      710
+
+Training Score: 0.7353
+Testing Score: 0.0.7343
+
+              precision    recall  f1-score   support
+
+           0       0.82      0.40      0.54       476
+           1       0.71      0.95      0.81       751
+
+    accuracy                           0.73      1227
+   macro avg       0.77      0.67      0.68      1227
+weighted avg       0.76      0.73      0.71      1227
+
+balanced_accuracy_score: 0.673
+accuracy_score: 0.734
+        
+</code></pre>
+
 
 ## BONUS Machine Learning Model Using KERAS Buy Zones.  
 
@@ -230,12 +245,6 @@ Weaknesses and Strengths
 Accuracy Score
 Loss
 
-#### Optimizing Model
-
-Why I chose this model
-Weaknesses and Strengths
-Accuracy Score
-Loss
 
 <pre><code>
         
@@ -255,3 +264,6 @@ References
 6. keziesuemo. (2021, October 15). Analysis Shows that about 85% of Circulating Bitcoin Has Not Been Sold in over Three Months. Remitano. https://remitano.com/news/dk/post/13973-analysis-shows-that-about-85-percent-of-circulating-bitcoin-has-not-been-sold-in-over-three-months
 7. Metcalfe’s Law - calculator. (n.d.). fxSolver. https://www.fxsolver.com/browse/formulas/Metcalfe%E2%80%99s+Law
 8. Wikipedia contributors. (2022, November 7). Bitcoin. Wikipedia. https://en.wikipedia.org/wiki/Bitcoin
+
+
+https://neptune.ai/blog/arima-vs-prophet-vs-lstm
