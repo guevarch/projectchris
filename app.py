@@ -1,14 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template
 import numpy as np
 import pandas as pd
 import joblib
-import requests
+import requests,
 from prophet import Prophet
 
 app = Flask(__name__)
 
+@app.route("/index")
+def index():
+   
+   return render_template("index.html")
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/run', methods=['GET', 'POST'])
 def main():
     
     # If a form is submitted
@@ -38,7 +42,7 @@ def main():
     else:
         prediction = ""
         
-    return render_template("index.html", output = prediction)
+    return redirect("/index", output = prediction)
 
 if __name__ == '__main__':
    app.run()
