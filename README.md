@@ -103,7 +103,7 @@ The null hypothesis of the test is that the time series can be represented by a 
 Null Hypothesis (H0): If failed to be rejected, it suggests the time series has a unit root, meaning it is non-stationary. It has some time dependent structure.
 Alternate Hypothesis (H1): The null hypothesis is rejected; it suggests the time series does not have a unit root, meaning it is stationary. It does not have time-dependent structure.
 
-Linear ADF - Running the example prints the test statistic value of -1.769203. The more negative this statistic, the more likely we are to reject the null hypothesis (we have a stationary dataset). As part of the output, we get a look-up table to help determine the ADF statistic. We can see that our statistic value of  -1.769203 is greater than the value of -3.432 at 1%. This suggests that we cannot reject the null hypothesis with a significance level of less than 1%. Not rejecting the null hypothesis means that the process has unit root, and in turn that the time series is non stationary or does have time-dependent structure
+Linear ADF - Running the example prints the test statistic value of -1.769203. The more negative this statistic, the more likely we are to reject the null hypothesis (we have a stationary dataset). As part of the output, we get a look-up table to help determine the ADF statistic. We can see that our statistic value of  -1.769203 is greater than the value of -3.432 at 0.05. This suggests that we cannot reject the null hypothesis with a significance level of less than 0.05. Not rejecting the null hypothesis means that the process has unit root, and in turn that the time series is non stationary or does have time-dependent structure
 
 <pre><code>
 ADF Statistic: -1.769203
@@ -115,7 +115,7 @@ Critical Values:
    y, random_state=1, stratify=y)
 </code></pre>
 
-Log ADF - We can see that the value is larger than the critical values, again, meaning that we can fail to reject the null hypothesis and in turn that the time series is non-stationary.
+A p-value less than 0.05 is typically considered to be statistically significant, in which case the null hypothesis should be rejected. A p-value greater than 0.05 means that deviation from the null hypothesis is not statistically significant, and the null hypothesis is not rejected. In this case, p value for the log of the prices has a low enough value for the null hypothesis to be rejected.
 
 
 <pre><code>
@@ -152,7 +152,6 @@ Linear Prices
 r2_score = 0.7455
 mean_squared_error =  54484853.20
 mean_absolute_error = 4327.367
-
 
 Value
 r2_score = 0.988
