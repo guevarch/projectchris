@@ -11,12 +11,17 @@
 
     <title>Navbar in Flask</title>
 </head>
+<style> 
+    body {
+      background-image: url("../static/backgroundpic.png");
+         }
+    </style>
 
 <body>
 
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,28 +37,27 @@
             </div>
         </nav>
 
-        <div class="jumbotron">
+        <div class="jumbotron jumbotron-fluid " style="background:white;" >
             <h1 class="display-16">
           		{% if title %}
           		  {{ title }}
           		{% else %}
                   Default title
           		{% endif %}
-            <img src="{{url_for('static', filename='btc4.png')}}align="middle" />
-	    </h1>
+
+                  <form name="form", action="/run" method="post", style="text-align: center;">
+                    <br><br>
+                    <h1> <input type="date" name="Date" value="2022-12-10"
+                    min="2022-12-10" max="2024-01-01",/>
+                    <br><br>
+                    <button class="btn btn-primary btn-dark" value="FORECAST" <span style="font-size: 35px" >FORECAST</span> </button>
+                    <br><br>
+                    <p>On {{date}}, price of bitcoin is ${{ output }}</p>
+                    </h1>
+                </form>
+                
         </div>
 
-        <form name="form", action="/run" method="post", style="text-align: center;">
-      
-          <br><br>
-          <h1> <input type="date" name="Date" value="2022-12-10"
-          min="2022-12-10" max="2024-01-01",/>
-          <br><br>
-          <button class="btn btn-primary btn-dark" value="FORECAST" <span style="font-size: 35px" >FORECAST</span> </button>
-          <br><br>
-          <p>On {{date}}, price of bitcoin is ${{ output }}</p>
-          </h1>
-      </form>
 
     </div>
 
