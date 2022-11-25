@@ -29,17 +29,16 @@
       <form name="form", action="/run" method="post", style="text-align: center;">
       
         <br><br>
-        Date: <input type="date" name="Date" value="2022-12-10"
+        <h1> <input type="date" name="Date" value="2022-12-10"
         min="2022-12-10" max="2024-01-01",/>
         <br><br>
-        <button value="Submit" >Run</button>
-        <p>{{ output }}</p>
+        <button class="btn btn-primary btn-dark" value="FORECAST" <span style="font-size: 35px" >FORECAST</span> </button>
+        <br><br>
+        <p>On {{date}}, price of bitcoin is ${{ output }}</p>
+        </h1>
     </form>
-
-
-
-
-        <center><h1>Bitcoin Log Price Forecast - 2024</h1>
+    <br><br>
+        <center><h1>Bitcoin Log Price Forecast</h1>
         <center><iframe src="../static/logprices.html" height="800" width="1300" title="Iframe Example"></iframe>  
 
 
