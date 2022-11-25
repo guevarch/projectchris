@@ -8,9 +8,12 @@ from prophet import Prophet
 app = Flask(__name__)
 
 @app.route("/")
-def index():
-   
-   return render_template("index.html")
+def view_home():
+    return render_template("index.html", title="Home page")
+
+@app.route("/Metrics")
+def view_first_page():
+    return render_template("Metrics.html", title="Metrics")
 
 
 @app.route('/run', methods=['GET', 'POST'])
