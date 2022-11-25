@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def view_home():
-    return render_template("index.html", title="Home page")
+    return render_template("index.html", title="Bitcoin Forecast")
 
 @app.route("/Metrics")
 def view_first_page():
@@ -44,6 +44,7 @@ def route():
         prediction = prediction[prediction['ds'].dt.strftime('%Y-%m-%d') == Date]
         prediction = np.exp(prediction.yhat)
         prediction = prediction.values[0].round(2)
+        
     else:
         prediction = ""
     
