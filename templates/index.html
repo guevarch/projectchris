@@ -11,20 +11,11 @@
 
     <title>Navbar in Flask</title>
 </head>
-<style> 
-    body {
-      background-image: url("../static/btc1.jpg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      opacity: 0.8;
-         }
-    </style>
 
-<body>
+<body style="background-color:#1c1919;" color: #DDD;>
 
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <!-- <div class="container">
+        <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,9 +30,9 @@
                         <a class="nav-link" href="{{ url_for('view_first_page') }}">Metrics</a>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
 
-        <div class="jumbotron jumbotron-fluid " style="background:white;" >
+        <div class="jumbotron jumbotron-fluid text-white" style="background:#202020;" >
             <h1 class="display-16">
           		{% if title %}
           		  {{ title }}
@@ -57,14 +48,36 @@
                     <h1> <input type="date" name="Date" value="2022-12-10"
                     min="2022-12-10" max="2024-01-01",/>
                     <br><br>
-                    <button class="btn btn-primary btn-dark" value="FORECAST" <span style="font-size: 35px" >FORECAST</span> </button>
+                    <button class="btn btn-dark" value="FORECAST" <span style="font-size: 35px " >FORECAST</span> </button>
                     <br><br>
-                    <p>On {{date}}, price of bitcoin is ${{ output }}</p>
+                    <p>{{ output }}</p>
                     </h1>
                 </form>
                 
         </div>
-
+       
+        <center><h1 class="text-white">Bitcoin Metcalfe's Law Value Status</h1>
+            <center><iframe src="../static/status.html" height="800" width="1000" title="Iframe Example"></iframe> 
+            <br><br>
+            <br><br>
+            <h1 class="text-white">Bitcoin Log Price Forecast</h1>    
+            <center><iframe src="../static/logprices.html" height="800" width="1000" title="Iframe Example"></iframe>  
+                <br><br>
+                <br><br>
+            <center><h1 class="text-white">Bitcoin Moving Average vs Status - 2024</h1>
+            <center><iframe src="../static/Bitcoinvaluestatus.html" height="800" width="1000" title="Iframe Example"></iframe>
+                <br><br>
+            <br><br>
+            <center><h1 class="text-white"> Bitcoin Wallets Prediction</h1>
+            <center><iframe src="../static/wallets.html" height="800" width="1000" title="Iframe Example"></iframe>
+                <br><br>
+            <br><br>
+            <center><h1 class="text-white"> Bitcoin Min and Max Mean</h1>
+            <center><iframe src="../static/bitcoinvaluemax.html" height="800" width="1000" title="Iframe Example"></iframe>
+                <br><br>
+            <br><br>
+            <center><h1 class="text-white"> Bitcoin Buy Zones</h1>
+            <center><iframe src="../static/buyzones.html" height="800" width="1000" title="Iframe Example"></iframe>
 
     </div>
 
