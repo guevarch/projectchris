@@ -26,15 +26,14 @@
         
       </center>
       
-      <form name="form", method="POST", style="text-align: center;">
-        <br>
-        start: <input type="date" name="start" value="2010-01-01"
-        min="2010-01-01" max="2010-01-01"/>
+      <form name="form", action="/run" method="post", style="text-align: center;">
+      
         <br><br>
-        end: <input type="date" name="end" value="2022-12-10"
+        Date: <input type="date" name="Date" value="2022-12-10"
         min="2022-12-10" max="2024-01-01",/>
         <br><br>
-        <button value="Submit", href="('/run')", {{ output }} >Run</button>
+        <button value="Submit" >Run</button>
+        <p>{{ output }}</p>
     </form>
 
 
