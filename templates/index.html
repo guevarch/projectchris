@@ -13,7 +13,11 @@
 </head>
 <style> 
     body {
-      background-image: url("../static/backgroundpic.png");
+      background-image: url("../static/btc1.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.8;
          }
     </style>
 
@@ -44,7 +48,10 @@
           		{% else %}
                   Default title
           		{% endif %}
-
+                  <style>
+                    h1 {text-align: center;}
+                   
+                    </style>
                   <form name="form", action="/run" method="post", style="text-align: center;">
                     <br><br>
                     <h1> <input type="date" name="Date" value="2022-12-10"
