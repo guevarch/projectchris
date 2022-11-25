@@ -33,12 +33,21 @@
         </nav>
 
         <div class="jumbotron">
-            <h1 class="display-4">
+            <h1 class="display-16">
           		{% if title %}
           		  {{ title }}
           		{% else %}
-          		  Default title
+          		  Bitcoin Forecast Project
           		{% endif %}
+
+                  <style>
+                    .jumbotron {
+              background-image: url("/static/btc4.png");
+              background-size: cover;
+              background-repeat: repeat;
+              background-size: 300px 300px; 
+            }
+            </style>
 	    </h1>
         </div>
 
