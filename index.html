@@ -14,25 +14,7 @@
 
 <body style="background-color:#1c1919;" color: #DDD;>
 
-    <!-- <div class="container">
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url_for('view_home') }}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('view_first_page') }}">Metrics</a>
-                </ul>
-            </div>
-        </nav> -->
-
-        <div class="jumbotron jumbotron-fluid text-white" style="background:#202020;" >
+        <div class="jumbotron jumbotron-fluid text-white" style="background:#1c1919;" >
             <h1 class="display-16">
           		{% if title %}
           		  {{ title }}
@@ -43,12 +25,12 @@
                     h1 {text-align: center;}
                    
                     </style>
-                  <form name="form", action="/run" method="post", style="text-align: center;">
+                  <form name="form", action="/run" method="post", style="text-align: center; ">
                     <br><br>
-                    <h1> <input type="date" name="Date" value="2022-12-10"
+                    <h1> <input type="date" name="Date" value="2022-12-10" style= "font-size: 100px; background:#292121;"
                     min="2022-12-10" max="2024-01-01",/>
                     <br><br>
-                    <button class="btn btn-dark" value="FORECAST" <span style="font-size: 35px " >FORECAST</span> </button>
+                    <button class="btn btn-dark"  value="FORECAST" <span style="font-size: 100px; background:#292121;" >FORECAST</span> </button>
                     <br><br>
                     <p>{{ output }}</p>
                     </h1>
