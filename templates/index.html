@@ -9,56 +9,61 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Navbar in Flask</title>
+
 </head>
 
-<body style="background-color:#1c1919;" color: #DDD;>
-
+<body style="background-color:#1c1919; color:white">
+    
         <div class="jumbotron jumbotron-fluid text-white" style="background:#1c1919;" >
             <h1 class="display-16">
           		{% if title %}
           		  {{ title }}
           		{% else %}
-                  Default title
+                  Bitcoin Forecast
           		{% endif %}
+                
                   <style>
-                    h1 {text-align: center;}
+                    h1 {text-align: center;
+                        font-size: 60px;}
+                        
+                   </style>
                    
-                    </style>
                   <form name="form", action="/run" method="post", style="text-align: center; ">
-                    <br><br>
-                    <h1> <input type="date" name="Date" value="2022-12-10" style= "font-size: 100px; background:#292121;"
+                
+                    <h2> <input type="date" name="Date" value="2022-12-10" style= "color:white; font-size: 30px; background:#292121;"
                     min="2022-12-10" max="2024-01-01",/>
+                  
+                    <button class="btn btn-dark"  value="FORECAST" <span style="font-size: 20px; background:#292121;" >FORECAST</span> </button>
                     <br><br>
-                    <button class="btn btn-dark"  value="FORECAST" <span style="font-size: 100px; background:#292121;" >FORECAST</span> </button>
-                    <br><br>
+                    
                     <p>{{ output }}</p>
-                    </h1>
+                    
+                    </h2>
                 </form>
                 
         </div>
        
-        <center><h1 class="text-white">Bitcoin Metcalfe's Law Value Status</h1>
+        <center><h2 class="text-white">Bitcoin Metcalfe's Law Value Status</h2>
             <center><iframe src="../static/status.html" height="800" width="1000" title="Iframe Example"></iframe> 
             <br><br>
             <br><br>
-            <h1 class="text-white">Bitcoin Log Price Forecast</h1>    
+            <h2 class="text-white">Bitcoin Log Price Forecast</h2>    
             <center><iframe src="../static/logprices.html" height="800" width="1000" title="Iframe Example"></iframe>  
                 <br><br>
                 <br><br>
-            <center><h1 class="text-white">Bitcoin Moving Average vs Status - 2024</h1>
+            <center><h2 class="text-white">Bitcoin Moving Average vs Status - 2024</h2>
             <center><iframe src="../static/Bitcoinvaluestatus.html" height="800" width="1000" title="Iframe Example"></iframe>
                 <br><br>
             <br><br>
-            <center><h1 class="text-white"> Bitcoin Wallets Prediction</h1>
+            <center><h2 class="text-white"> Bitcoin Wallets Prediction</h2>
             <center><iframe src="../static/wallets.html" height="800" width="1000" title="Iframe Example"></iframe>
                 <br><br>
             <br><br>
-            <center><h1 class="text-white"> Bitcoin Min and Max Mean</h1>
+            <center><h2 class="text-white"> Bitcoin Min and Max Mean</h2>
             <center><iframe src="../static/bitcoinvaluemax.html" height="800" width="1000" title="Iframe Example"></iframe>
                 <br><br>
             <br><br>
-            <center><h1 class="text-white"> Bitcoin Buy Zones</h1>
+            <center><h2 class="text-white"> Bitcoin Buy Zones</h2>
             <center><iframe src="../static/buyzones.html" height="800" width="1000" title="Iframe Example"></iframe>
 
     </div>

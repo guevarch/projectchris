@@ -44,7 +44,7 @@ def route():
         prediction = prediction[prediction['ds'].dt.strftime('%Y-%m-%d') == Date]
         prediction = np.exp(prediction.yhat)
         prediction = prediction.values[0].round(2)
-        prediction 
+        prediction = ("On " +str(Date) + ", the forecasted price of bitcoin is $" + str(prediction))
         
     else:
         prediction = ""
