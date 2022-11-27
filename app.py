@@ -38,14 +38,53 @@ def route():
         insample.columns = ['ds']
 
         # in-sample prediction
-        prediction = model.predict(insample)
+        predictionprice = model.predict(insample)
 
         # Get prediction
-        prediction = prediction[prediction['ds'].dt.strftime('%Y-%m-%d') == Date]
-        prediction = np.exp(prediction.yhat)
-        prediction = prediction.values[0].round(2)
-        prediction = ("On " +str(Date) + ", the forecasted price of bitcoin is $" + str(prediction))
+        predictionprice = predictionprice[predictionprice['ds'].dt.strftime('%Y-%m-%d') == Date]
+        predictionprice = np.exp(predictionprice.yhat)
+        predictionprice = predictionprice.values[0].round(2)
+        # predictionprice = ("On " +str(Date) + ", the forecasted price of bitcoin is $" + str(predictionprice))
+
+        dfvalue = pd.read_csv("Resources/mlvaluedata.csv")
+
+        # instantiate the model and set parameters
+        model = Prophet()
+
+        # fit the model to historical data
+        model.fit(dfvalue)
+
+        # in-sample prediction
+        predictionvalue = model.predict(insample)
+
+        # Get prediction
+        predictionvalue = predictionvalue[predictionvalue['ds'].dt.strftime('%Y-%m-%d') == Date]
+        predictionvalue = np.exp(predictionvalue.yhat)
+        predictionvalue = predictionvalue.values[0].round(2)
+        # predictionvalue = ("The forecasted value of bitcoin is $" + str(predictionvalue))
+        predictionvalue
         
+
+        dfwallet = pd.read_csv("Resources/mlwalletsdata.csv")
+
+        # instantiate the model and set parameters
+        model = Prophet()
+
+        # fit the model to historical data
+        model.fit(dfwallet)
+
+        # in-sample prediction
+        predictionwall = model.predict(insample)
+
+        # Get prediction
+        predictionwall = predictionwall[predictionwall['ds'].dt.strftime('%Y-%m-%d') == Date]
+        predictionwall = (predictionwall.yhat)
+        predictionwall = predictionwall.values[0].round(0)
+        # predictionwall = ("The forecasted number of bitcoin wallets are " + str(predictionwall))
+        predictionwall
+
+        prediction = ("On " +str(Date) + ", the forecasted price of bitcoin is $" + str(predictionprice)) + (", the value of bitcoin is $" + str(predictionvalue) + (", and the number of bitcoin wallets are " + str(predictionwall))) 
+
     else:
         prediction = ""
     

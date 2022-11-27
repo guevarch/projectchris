@@ -12,35 +12,41 @@
 </head>
 
 
-<body style="background-color:#252020; color:rgb(31, 28, 28)">
+<body style="background-color:#666362; color:#ffffff">
     
+    <div class="container">
+        
+        <nav class="navbar navbar-expand-lg py-5 navbar-light bg-dark">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('view_home') }}"> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('view_first_page') }}"></a>
+                </ul>
+            </div>
+        </nav>
    
-        <div class="jumbotron jumbotron-fluid text-white" style="background:#252323;" >
+        <div class="jumbotron jumbotron-fluid text-white" style="background:#666362;" >
 
             <h1 class="display-16">
-          		{% if title %}
-          		  {{ title }}
-          		{% else %}
-                 
-          		{% endif %}
-             
+                    
                   <style>
                     h1 {text-align: center;
-                        font-size: 60px;}
-                        
+                        font-size: 60px;}   
                    </style>
                    <div id="logo"> 
-                    <img src="../static/logo2.png"> 
+                    <img src="../static/logo5.png" width="960" height="650" > 
                     </div> 
                     <br><br>
                   <form name="form", action="/run" method="post", style="text-align: center; ">
                 
-                    <h2> <input type="date" name="Date" value="2022-12-10" style= "color:white; font-size: 100px; background:#292121;"
+                    <h2> <input type="date" name="Date" value="2022-12-10" style= "color:rgb(255, 255, 255); font-size: 50px; background:rgb(74, 75, 75)"
                     min="2022-12-10" max="2024-01-01",/>
                     <br><br>
-                    <button class="btn btn-dark"  value="FORECAST" <span style="font-size: 100px; background:#292121;" >FORECAST</span> </button>
-                    <br><br>
-                    
+                    <button class="btn btn-dark"  value="FORECAST" style= "font-size: 50px"; >FORECAST</span> </button>
+                    <br><br>             
                     <p>{{ output }}</p>
                     
                     </h2>
@@ -49,27 +55,27 @@
         </div>
        
         <center><h2 class="text-white">Bitcoin Metcalfe's Law Value Status</h2>
-            <center><iframe src="../static/status.html" height="800" width="1000" title="Iframe Example"></iframe> 
+            <center><iframe src="../static/status.html" height="800" width="1200" title="Iframe Example"></iframe> 
             <br><br>
             <br><br>
             <h2 class="text-white">Bitcoin Log Price Forecast</h2>    
-            <center><iframe src="../static/logprices.html" height="800" width="1000" title="Iframe Example"></iframe>  
+            <center><iframe src="../static/logprices.html" height="800" width="1200" title="Iframe Example"></iframe>  
                 <br><br>
                 <br><br>
             <center><h2 class="text-white">Bitcoin Moving Average vs Status - 2024</h2>
-            <center><iframe src="../static/Bitcoinvaluestatus.html" height="800" width="1000" title="Iframe Example"></iframe>
+            <center><iframe src="../static/Bitcoinvaluestatus.html" height="800" width="1200" title="Iframe Example"></iframe>
                 <br><br>
             <br><br>
             <center><h2 class="text-white"> Bitcoin Wallets Prediction</h2>
-            <center><iframe src="../static/wallets.html" height="800" width="1000" title="Iframe Example"></iframe>
+            <center><iframe src="../static/wallets.html" height="800" width="1200" title="Iframe Example"></iframe>
                 <br><br>
             <br><br>
             <center><h2 class="text-white"> Bitcoin Min and Max Mean</h2>
-            <center><iframe src="../static/bitcoinvaluemax.html" height="800" width="1000" title="Iframe Example"></iframe>
+            <center><iframe src="../static/bitcoinvaluemax.html" height="800" width="1200" title="Iframe Example"></iframe>
                 <br><br>
             <br><br>
             <center><h2 class="text-white"> Bitcoin Buy Zones</h2>
-            <center><iframe src="../static/buyzones.html" height="800" width="1000" title="Iframe Example"></iframe>
+            <center><iframe src="../static/buyzones.html" height="800" width="1200" title="Iframe Example"></iframe>
 
     </div>
 
