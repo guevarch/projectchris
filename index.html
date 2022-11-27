@@ -9,31 +9,36 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
 </head>
 
-<body style="background-color:#1c1919; color:white">
+
+<body style="background-color:#252020; color:rgb(31, 28, 28)">
     
-        <div class="jumbotron jumbotron-fluid text-white" style="background:#1c1919;" >
+   
+        <div class="jumbotron jumbotron-fluid text-white" style="background:#252323;" >
+
             <h1 class="display-16">
           		{% if title %}
           		  {{ title }}
           		{% else %}
-                  Bitcoin Forecast
+                 
           		{% endif %}
-                
+             
                   <style>
                     h1 {text-align: center;
                         font-size: 60px;}
                         
                    </style>
-                   
+                   <div id="logo"> 
+                    <img src="../static/logo2.png"> 
+                    </div> 
+                    <br><br>
                   <form name="form", action="/run" method="post", style="text-align: center; ">
                 
-                    <h2> <input type="date" name="Date" value="2022-12-10" style= "color:white; font-size: 30px; background:#292121;"
+                    <h2> <input type="date" name="Date" value="2022-12-10" style= "color:white; font-size: 100px; background:#292121;"
                     min="2022-12-10" max="2024-01-01",/>
-                  
-                    <button class="btn btn-dark"  value="FORECAST" <span style="font-size: 20px; background:#292121;" >FORECAST</span> </button>
+                    <br><br>
+                    <button class="btn btn-dark"  value="FORECAST" <span style="font-size: 100px; background:#292121;" >FORECAST</span> </button>
                     <br><br>
                     
                     <p>{{ output }}</p>
