@@ -10,7 +10,7 @@ I chose this topic because I believe bitcoin is a tool for economic sovereignty,
   <img src="static\developingnationsadoption.webp" width="350" title="hover text">
 </p>
 
-The first objective is to use the Prophet time series model to forecast price, active addresses and value(according to Metcafe’s Law) by 2024. The second objective is to determine if the current price is overvalued or undervalued compared to Metcafe’s Law of Network Adoptions. The supervised learning models used to model the data are DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier, LogisticRegression, and RandomForestClassifier.
+The first objective is to use the Prophet time series model to forecast price, wallets and value(according to Metcafe’s Law). The second objective is to determine if the current price is overvalued or undervalued compared to Metcafe’s Law of Network Adoptions. The supervised learning models used to model the data are Logistic Regression and 
 
 # Method
 
