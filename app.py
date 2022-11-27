@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def view_home():
-    return render_template("index.html", title="Bitcoin Forecast")
+    return render_template("index.html", title="")
 
 @app.route("/Metrics")
 def view_first_page():
