@@ -88,7 +88,7 @@ Histogram Log
 
 </p>
 
-We also create a line plot of the log transformed data and can see the exponential growth seems diminished, but we still have a trend and seasonal elements.
+The seasonal trend is still present within the data set due to the halvening of block rewards every 4 years. 
 
 <pre><code>
 Mean and Var Test Log
@@ -115,7 +115,7 @@ Critical Values:
    y, random_state=1, stratify=y)
 </code></pre>
 
-A p-value less than 0.05 is typically considered to be statistically significant, in which case the null hypothesis should be rejected. A p-value greater than 0.05 means that deviation from the null hypothesis is not statistically significant, and the null hypothesis is not rejected. In this case, p value for the log of the prices has a low enough value for the null hypothesis to be rejected.
+A p-value less than 0.05 is typically considered to be statistically significant, in which case the null hypothesis should be rejected. A p-value greater than 0.05 means that deviation from the null hypothesis is not statistically significant, and the null hypothesis is not rejected. In this case, p value for the log of the prices has a low enough value for the null hypothesis to be rejected. The -value can be further reduced by taking the diff of the log value but Prophet, unlike ARIMA, doesn't factor that method into its parameters. For this analysis, this p-value would suffice.
 
 
 <pre><code>
@@ -129,7 +129,7 @@ p-value: 0.021000
 
 ## Prophet
 
-Prophet is specifically designed for business time series prediction. It achieves very good results for the stock data but, speaking from anecdotes, it can fail spectacularly on time series datasets from other domains. In particular, this holds for time series where the notion of calendar date is not applicable and we cannot learn any seasonal patterns. Prophet’s advantage is that it requires less hyperparameter tuning as it is specifically designed to detect patterns in business time series.
+Prophet is specifically designed for business time series prediction. It achieves very good results for the stock data but it can fail spectacularly on time series datasets from other domains. In particular, this holds for time series where the notion of calendar date is not applicable and we cannot learn any seasonal patterns. Prophet’s advantage is that it requires less hyperparameter tuning as it is specifically designed to detect patterns in business time series. Due to the hyperbolic exponential growth of Bitcoins price and adoptoion, after 2024, upper/lower/middle bound predictions "fray" - as seen on the bitcoin log price prediction and the bitcoin value prediction.
 
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
@@ -235,20 +235,38 @@ accuracy_score: 0.734
 </code></pre>
 
 
-## BONUS Machine Learning Model Using KERAS Buy Zones.  
+## BONUS Machine Learning Model Using BalancedRandomForestClassifier Buy Zones.  
 
-### KERAS 
+### BalancedRandomForestClassifier 
 
 Why I chose this model
 Weaknesses and Strengths
-Accuracy Score
-Loss
-
 
 <pre><code>
-        
-</code></pre>
 
+Confusion Matrix
+          Predicted 0	Predicted 1	Predicted 2	Predicted 3
+Actual 0	        0	        219	        0	        0
+Actual 1	        0	        259	        3	        0
+Actual 2	        0	          0	        289	      0
+Actual 3	        0	          0	        412	      14
+Training Score: 0.4625
+Testing Score: 0.469
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       219
+           1       0.54      0.99      0.70       262
+           2       0.41      1.00      0.58       289
+           3       1.00      0.03      0.06       426
+
+    accuracy                           0.47      1196
+   macro avg       0.49      0.51      0.34      1196
+weighted avg       0.57      0.47      0.32      1196
+
+balanced_accuracy_score : 0.505
+accuracy_score : 0.469
+
+</code></pre>
 
 # Conclusion
 
