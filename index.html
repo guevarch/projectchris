@@ -15,39 +15,43 @@
 <body style="background-color:#131212; color:#f2eaea">
     
     <div class="container">
-   
-                   <div id="logo" > 
-                    <img src="../static/logo5.png" class="left" width="1200" height="1000"  > 
-                    </div> 
-                    <br><br>
-                  <form name="form", action="/run" method="post", style="text-align: center; ">
-                
-                    <h2> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:rgb(235, 230, 230); font-size: 50px; background:rgb(20, 21, 21)""
-                    min="2022-12-10" max="2024-01-01",/>
-                    <br><br>
-                    <button class="btn btn-dark"  value="FORECAST" style= "font-size: 50px"; >FORECAST</span> </button>
-                    <br><br>             
-                    <p>{{ output }}</p>
-                    
-                    </h2>
-                </form>
+          <div id="logo" > 
+          <img src="../static/logo5.png" class="center" width="1200" height="800"  > 
+          </div> 
+          <br><br>
+        <form name="form", action="/run" method="post", style="text-align: center; ">
+    
+        <h2> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:rgb(235, 230, 230); font-size: 50px; background:rgb(20, 21, 21)""
+        min="2022-12-10" max="2024-01-01",/>
+        <br><br>
+        <button class="btn btn-dark"  value="FORECAST" style= "font-size: 50px"; >FORECAST</span> </button>
+        <br><br>             
+        <p>{{ output }}</p>
+        
+        </h2>
+        </form>
      
-       
-            <center><h2 class="text-white">Bitcoin Metcalfe's Law Value Status</h2>
-            <center><iframe src="../static/status.html" height="800" width="1200" title="Iframe Example"></iframe> 
             <br><br>
             <br><br>
             <h2 class="text-white">Bitcoin Log Price Forecast</h2>    
             <center><iframe src="../static/logprices.html" height="800" width="1200" title="Iframe Example"></iframe>  
                 <br><br>
                 <br><br>
-            <center><h2 class="text-white">Bitcoin Moving Average vs Status - 2024</h2>
-            <center><iframe src="../static/Bitcoinvaluestatus.html" height="800" width="1200" title="Iframe Example"></iframe>
-                <br><br>
-            <br><br>
             <center><h2 class="text-white"> Bitcoin Wallets Prediction</h2>
             <center><iframe src="../static/wallets.html" height="800" width="1200" title="Iframe Example"></iframe>
-                <br><br>
+            <br><br>
+            <br><br>
+            <center><h2 class="text-white"> Bitcoin Value Prediction</h2>
+            <center><iframe src="../static/value.html" height="800" width="1200" title="Iframe Example"></iframe>
+            <br><br>
+            <br><br>
+            <center><h2 class="text-white">Bitcoin Metcalfe's Law Value Status</h2>
+            <center><iframe src="../static/status.html" height="800" width="1200" title="Iframe Example"></iframe> 
+            <br><br>
+            <br><br>
+            <center><h2 class="text-white">Bitcoin Moving Average vs Status - 2024</h2>
+            <center><iframe src="../static/Bitcoinvaluestatus.html" height="800" width="1200" title="Iframe Example"></iframe>
+            <br><br>
             <br><br>
             <center><h2 class="text-white"> Bitcoin Min and Max Mean</h2>
             <center><iframe src="../static/bitcoinvaluemax.html" height="800" width="1200" title="Iframe Example"></iframe>
