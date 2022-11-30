@@ -24,6 +24,7 @@
               background-repeat: no-repeat;
               background-size: 20% 100%;
               text-align: center;
+              font-style: italic;
               }    
           </style>
         </div>
@@ -32,33 +33,17 @@
             <div class="col">
                 <form name="form", action="/run" method="post", style="text-align: center;">
     
-                    <h2> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:white; font-size: 50px; background:orange"
+                    <h3> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:white; font-size: 50px; background:orange"
                     min="2022-12-10" max="2024-01-01",/>
             </div>
             <div class="col">
-                <button class="btn btn-dark"  value="FORECAST" style= "color:white; font-size: 50px; background:orange" font-size: 50px"; >FORECAST</span> </button>
+                <button class="btn btn-dark"  value="FORECAST" style= "color:white; font-size: 50px; background:orange" >FORECAST</span> </button>
             </div>
             <br><br> 
             <div class="col">
                 <h3 <p>{{ output }}</p> </h3>
             </div>
-          </div>
-
-
-    <!-- <div class="container">
-        <form name="form", action="/run" method="post", style="text-align: center;">
-    
-        <h2> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:rgb(235, 230, 230); font-size: 50px; background:rgb(20, 21, 21)"
-        min="2022-12-10" max="2024-01-01",/>
-        <br><br>
-        <button class="btn btn-dark"  value="FORECAST" style= "font-size: 50px"; >FORECAST</span> </button>
-        <br><br>             
-        <p>{{ output }}</p>
-        
-        </h2>
-        </form> -->
-     
-            <br><br>
+          </div>            
             <br><br>
             <center><h2 class="text-black">Bitcoin Log Price Forecast</h2>    
             <center><iframe src="../static/logprices.html" height="800" width="1200" title="Iframe Example"></iframe>  
