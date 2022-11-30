@@ -28,22 +28,23 @@
               }    
           </style>
         </div>
-   
+        
         <div class="row">
-            <div class="col">
+            <div class="col-6 col-md-4">
                 <form name="form", action="/run" method="post", style="text-align: center;">
     
-                    <h3> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:white; font-size: 50px; background:orange"
+    
+                    <h3> <input type="date" name="Date" value="2022-12-10" class="btn btn-dark" style= "color:white; font-size: 30px; background:orange"
                     min="2022-12-10" max="2024-01-01",/>
             </div>
-            <div class="col">
-                <button class="btn btn-dark"  value="FORECAST" style= "color:white; font-size: 50px; background:orange" >FORECAST</span> </button>
+            <div class="col-6 col-md-4">
+                <button class="btn btn-dark"  value="FORECAST" style= "color:white; font-size: 30px; background:orange" >FORECAST</span> </button>
             </div>
-            <br><br> 
-            <div class="col">
+            <div class="col-6 col-md-4">
                 <h3 <p>{{ output }}</p> </h3>
             </div>
-          </div>            
+          </div>
+          
             <br><br>
             <center><h2 class="text-black">Bitcoin Log Price Forecast</h2>    
             <center><iframe src="../static/logprices.html" height="800" width="1200" title="Iframe Example"></iframe>  
