@@ -1,1 +1,1 @@
-web: gunicorn projectchris.wsgi
+web: gunicorn app:app
