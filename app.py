@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request
 import numpy as np
 import pandas as pd
 from prophet import Prophet
+import yfinance as yf
 
 
 
@@ -21,9 +22,22 @@ def route():
     print('Inside route')
     # If a form is submitted
     if request.method == "POST":
-        
-        df = pd.read_csv("Resources/mldatapriceslog.csv")
+        df = pd.read_csv("Resources/btcjoin.csv", parse_dates=['date'])
+        btc_df = yf.download('BTC-USD')
+        btc_df = btc_df.reset_index()
+        btc_df = btc_df.loc[(btc_df['Date'] > '2022-10-25')]
+        btc_df['Close']=btc_df['Close'].astype("float")
+        df['price']=df['price'].str.replace(',','')
+        df['price']=df['price'].astype("float")
+        btc_df = btc_df.rename(columns={"Close": "price", "Date":"date"})
+        df = pd.merge(df, btc_df, on=['date', 'price'], how='outer')
+        df = df.drop(columns=['volume','change', 'low', 'high', 'open','Open','High','Low','Adj Close', 'Volume', 'Unnamed: 0'])
+        df = df.rename(columns={"value": "wallets"})
+        df['priceL'] = np.log(df['price'])
 
+        df = df[['date', 'priceL']]
+        df = df.rename(columns = {"date":"ds", "priceL":"y"})
+        
         # instantiate the model and set parameters
         model = Prophet()
 
