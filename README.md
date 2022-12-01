@@ -142,6 +142,7 @@ The process for prophet is to create a df_train, fitting it into a prophet model
   <img src="static\prices.png" width="400" title="hover text">
   <img src="static\logprices.png" width="400" title="hover text">
   <img src="static\value.png" width="400" title="hover text">
+  <img src="static\wallets.png" width="400" title="hover text">
 </p>
 
 We can see below that log prices do in fact produce a better r2, mse, and mbe score compared to the linear prices. The mean squared error (MSE) tells you how close a regression line is to a set of points. It does this by taking the distances from the points to the regression line (these distances are the “errors”) and squaring them. The mean absolute error is the average difference between the observations (true values) and model output (predictions).  In summary, the lower the mse and mbe the better the forecast. However, I am a bit skeptical of these values. Even though on paper these are great results they could be due to Overfitting. The same goes for the scores of Value. They look too good to be true. 
@@ -163,7 +164,7 @@ mean_squared_error = 0.115
 mean_absolute_error = 0.249
 </code></pre>
 
-## Machine Learning Model Using Value(Metcalfe's Law) Classification: Logistic Regression, Resampling Using Smoteenn.  
+## Logistic Regression Using Value(Metcalfe's Law) 
 
 ### Hyperparameter Tuning
 
@@ -172,8 +173,7 @@ Best: 0.948246 using {'C': 10, 'penalty': 'l2', 'solver': 'newton-cg'}
 </code></pre>
 #### LogisticRegression
 
-Why I chose this model
-Weaknesses and Strengths
+<img src="static\bitcoinvaluestatus.png" width="400" height="300"  title="hover text">
 
 <pre><code>
 
@@ -200,7 +200,7 @@ accuracy_score: 0.950
 </code></pre>
 
 
-## Machine Learning Model Using Moving Average Classification: Logistic Regression
+## Logistic Regression Using Mean of 50, 200, and 300 day moving averages
 
 ### Hyperparameter Tuning
 
