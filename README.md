@@ -4,29 +4,27 @@
 
 On 3 January 2009, the bitcoin network was created when Nakamoto mined the starting block of the chain, known as the genesis block. Embedded in the coinbase of this block was the text "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks". Bitcoin is a decentralized digital currency that can be transferred on the peer-to-peer bitcoin network. Bitcoin transactions are verified by network nodes through cryptography and recorded in a public distributed ledger called a blockchain. The cryptocurrency was invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto. The currency began use in 2009,] when its implementation was released as open-source software.
 
-I chose this topic because I believe bitcoin is a tool for economic sovereignty, individual property rights and financial inclusion. We can see evidence of this in the adoption rates in emerging markets or developing nations.
+I chose this topic because I believe bitcoin is a tool for economic sovereignty, individual property rights and financial inclusion. We can see evidence of this in the adoption rates in emerging markets or developing nations. We can see the fastest adoption are in developing nations such as Nigeria, Thailand and the Philippines. The image below also shows that the exponential growth rate of bitcoin is very similar to the growth of the internet from 1994 to present. In fact, Bitcoin's network growth rate is faster than the internet. 
 
 <p align="center">
   <img src="static\developingnationsadoption.webp" width="350" title="hover text">
+  <img src="static\btcgrowth.jpg" width="350" title="hover text">
+  <img src="static\btcgrowth2.jpeg" width="350" title="hover text">
+
 </p>
 
-The first objective is to use the Prophet time series model to forecast price, wallets and value(according to Metcafe’s Law). The second objective is to determine if the current price is overvalued or undervalued compared to Metcafe’s Law of Network Adoptions. The supervised learning models used to model the data are Logistic Regression and 
+The first objective is to use the Prophet time series model to forecast price, wallets and value(according to Metcafe’s Law) up to 2024. The second objective is to determine if the current price is overvalued or undervalued compared to Metcafe’s Law of Network Adoptions and Moving averages.
 
 # Method
 
-The first step in the process is to find the data. The data sources included market data such as price, open, close, adjusted close, and date. Other data sources that were needed for the analysis were active addresses, coin supply, and wallets. The file types are comma separated values.
+The first step in the process is to find the data. The data sources included market data such as price, open, close, adjusted close, and date. Other data sources that were needed for the analysis were active addresses, coin supply, and wallets. The file types are comma separated values. Next, is to create a database in PostgreSQL and create tables to house the csv data. A join function was used to combine two csv tables and psycopg2 was used to connect PostgreSQL to pandas dataframe. The new dataframe was further cleaned, cured and prepared for analysis and Prophet time series and supervised machine learning. 
 
 List Data Sources: 
 
 - Circulating Bitcoin: https://www.blockchain.com/explorer/charts/total-bitcoins
 - Wallets: https://www.blockchain.com/explorer/charts/my-wallet-n-users
-- Bitcoin Market Data: https://www.investing.com/crypto/bitcoin
+- Bitcoin Market Data: https://www.investing.com/crypto/bitcoin and Yahoo Finance
 - Active Addresses: https://studio.glassnode.com/metrics
-
-
-Next, is to create a database in PostgreSQL and create tables to house the csv data. A join function was used to combine two csv tables and psycopg2 was used to connect PostgreSQL to pandas dataframe. The new dataframe was further cleaned, cured and prepared for analysis and Prophet time series and supervised machine learning. 
-
-
 
 # Results
 
@@ -42,7 +40,7 @@ df['networkvalue'] = df["price"] - df["value"]
 
 ### Value = Metcafe's law = (Active Addressess)^2
 
-The value of a network is famously accredited to Bob Metcalfe, the inventor of Ethernet and founder of the computer networking company 3Com. Metcalfe’s Law states that a network’s value is proportional to the square of the number of its users. It also reveals when Bitcoin has been overvalued.  Wheatley and co point to four occasions when Bitcoin has become overvalued and then crashed; in other words, when the bubble has burst.
+The value of a network is famously accredited to Bob Metcalfe, the inventor of Ethernet and founder of the computer networking company 3Com. Metcalfe’s Law states that a network’s value is proportional to the square of the number of its users. It also reveals when Bitcoin has been overvalued.  Wheatley and co point to four occasions when Bitcoin has become overvalued and then crashed; in other words, when the bubble has burst. 
 
 ### Price = Market Cap/Current Supply
 
@@ -59,6 +57,13 @@ Network Value is simply subtracting the current value or Metcalfe's law by the c
 ### Determining Stationary
 
 Stationary Time Series - The observations in a stationary time series are not dependent on time. Time series are stationary if they do not have trend or seasonal effects. Summary statistics calculated on the time series are consistent over time, like the mean or the variance of the observations. When a time series is stationary, it can be easier to model. Statistical modeling methods assume or require the time series to be stationary to be effective.
+
+Bitcoin's very nature is time dependant. Every four years Bitcoin goes through a halvening of block reward. The image below shows the issuance schedule of bitcoin. Each halving lowers Bitcoin's inflation rate. The orange line is Bitcoin's inflation rate during a given period, while the blue line is the total number of bitcoins issued. The Bitcoin halving is scheduled in block height, not date.
+The halving happens every 210,000 blocks. The 2024 halving will happen on block 840,000. The current Bitcoin block subsidy is 6.25 bitcoins per block. When block 840,000 is hit in 2024, the subsidy will drop to 3.125 bitcoins (BTC) per block. All 21 million bitcoins (BTC) will be mined by 2140. But more than 98% will be mined by 2030.
+
+<p align="center">
+  <img src="static\bitcoininflation.webp" width="350" title="hover text">
+ </p>
 
 Observations from a non-stationary time series show seasonal effects, trends, and other structures that depend on the time index. Summary statistics like the mean and variance do change over time, providing a drift in the concepts a model may try to capture. Classical time series analysis and forecasting methods are concerned with making non-stationary time series data stationary by identifying and removing trends and removing seasonal effects.
 
@@ -77,9 +82,7 @@ Histogram Linear
   <img src="static\histogramlinear.png" width="350" title="hover text">
 </p>
 
-Non Gaussian curve indicates that this squashed distribution of the observations may be another indicator of a non-stationary time series.
-Reviewing the plot of the time series again, we can see that there is an obvious seasonality component, and it looks like the seasonality component is growing.
-This may suggest an exponential growth from season to season. A log transform can be used to flatten out exponential change back to a linear relationship.
+Non Gaussian(Normal Bell) curve indicates that this squashed distribution of the observations may be another indicator of a non-stationary time series. Reviewing the plot of the time series again, we can see that there is an obvious seasonality component, and it looks like the seasonality component is growing. This may suggest an exponential growth from season to season. A log transform can be used to flatten out exponential change back to a linear relationship.
 
 Histogram Log
 
@@ -88,7 +91,7 @@ Histogram Log
 
 </p>
 
-The seasonal trend is still present within the data set due to the halvening of block rewards every 4 years. 
+Log form of the price helps reduce the mean and variance but the seasonal nature is still present in the data. 
 
 <pre><code>
 Mean and Var Test Log
@@ -103,7 +106,7 @@ The null hypothesis of the test is that the time series can be represented by a 
 Null Hypothesis (H0): If failed to be rejected, it suggests the time series has a unit root, meaning it is non-stationary. It has some time dependent structure.
 Alternate Hypothesis (H1): The null hypothesis is rejected; it suggests the time series does not have a unit root, meaning it is stationary. It does not have time-dependent structure.
 
-Linear ADF - Running the example prints the test statistic value of -1.769203. The more negative this statistic, the more likely we are to reject the null hypothesis (we have a stationary dataset). As part of the output, we get a look-up table to help determine the ADF statistic. We can see that our statistic value of  -1.769203 is greater than the value of -3.432 at 0.05. This suggests that we cannot reject the null hypothesis with a significance level of less than 0.05. Not rejecting the null hypothesis means that the process has unit root, and in turn that the time series is non stationary or does have time-dependent structure
+Linear ADF - Running the example prints the test statistic value of -1.769203. The more negative this statistic, the more likely we are to reject the null hypothesis (we have a stationary dataset). We can see that our statistic value of  -1.769203 is greater than the value of -3.432 at 0.05. This suggests that we cannot reject the null hypothesis with a significance level of less than 0.05. Not rejecting the null hypothesis means that the process has unit root, and in turn that the time series is non stationary or does have time-dependent structure
 
 <pre><code>
 ADF Statistic: -1.769203
@@ -117,7 +120,6 @@ Critical Values:
 
 A p-value less than 0.05 is typically considered to be statistically significant, in which case the null hypothesis should be rejected. A p-value greater than 0.05 means that deviation from the null hypothesis is not statistically significant, and the null hypothesis is not rejected. In this case, p value for the log of the prices has a low enough value for the null hypothesis to be rejected. The -value can be further reduced by taking the diff of the log value but Prophet, unlike ARIMA, doesn't factor that method into its parameters. For this analysis, this p-value would suffice.
 
-
 <pre><code>
 ADF Statistic: -3.182831
 p-value: 0.021000
@@ -129,7 +131,7 @@ p-value: 0.021000
 
 ## Prophet
 
-Prophet is specifically designed for business time series prediction. It achieves very good results for the stock data but it can fail spectacularly on time series datasets from other domains. In particular, this holds for time series where the notion of calendar date is not applicable and we cannot learn any seasonal patterns. Prophet’s advantage is that it requires less hyperparameter tuning as it is specifically designed to detect patterns in business time series. Due to the hyperbolic exponential growth of Bitcoins price and adoptoion, after 2024, upper/lower/middle bound predictions "fray" - as seen on the bitcoin log price prediction and the bitcoin value prediction.
+Prophet is specifically designed for business time series prediction. It achieves very good results for the stock data but it can fail on time series datasets from other domains. In particular, this holds for time series where the notion of calendar date is not applicable and we cannot learn any seasonal patterns. Prophet’s advantage is that it requires less hyperparameter tuning as it is specifically designed to detect patterns in business time series. Due to the hyperbolic exponential growth of Bitcoins price and adoption, after 2024, upper/lower/middle bound predictions "fray" - as seen on the bitcoin log price prediction and the bitcoin value prediction.
 
 The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.
 
@@ -141,6 +143,8 @@ The process for prophet is to create a df_train, fitting it into a prophet model
   <img src="static\logprices.png" width="400" title="hover text">
   <img src="static\value.png" width="400" title="hover text">
 </p>
+
+We can see below that log prices do in fact produce a better r2, mse, and mbe score compared to the linear prices. The mean squared error (MSE) tells you how close a regression line is to a set of points. It does this by taking the distances from the points to the regression line (these distances are the “errors”) and squaring them. The mean absolute error is the average difference between the observations (true values) and model output (predictions).  In summary, the lower the mse and mbe the better the forecast. However, I am a bit skeptical of these values. Even though on paper these are great results they could be due to Overfitting. The same goes for the scores of Value. They look too good to be true. 
 
 <pre><code>
 LogPrices
@@ -157,7 +161,6 @@ Value
 r2_score = 0.988
 mean_squared_error = 0.115
 mean_absolute_error = 0.249
-
 </code></pre>
 
 ## Machine Learning Model Using Value(Metcalfe's Law) Classification: Logistic Regression, Resampling Using Smoteenn.  
@@ -231,42 +234,6 @@ weighted avg       0.76      0.73      0.71      1227
 
 balanced_accuracy_score: 0.673
 accuracy_score: 0.734
-        
-</code></pre>
-
-
-## BONUS Machine Learning Model Using BalancedRandomForestClassifier Buy Zones.  
-
-### BalancedRandomForestClassifier 
-
-Why I chose this model
-Weaknesses and Strengths
-
-<pre><code>
-
-Confusion Matrix
-          Predicted 0	Predicted 1	Predicted 2	Predicted 3
-Actual 0	        0	        219	        0	        0
-Actual 1	        0	        259	        3	        0
-Actual 2	        0	          0	        289	      0
-Actual 3	        0	          0	        412	      14
-Training Score: 0.4625
-Testing Score: 0.469
-              precision    recall  f1-score   support
-
-           0       0.00      0.00      0.00       219
-           1       0.54      0.99      0.70       262
-           2       0.41      1.00      0.58       289
-           3       1.00      0.03      0.06       426
-
-    accuracy                           0.47      1196
-   macro avg       0.49      0.51      0.34      1196
-weighted avg       0.57      0.47      0.32      1196
-
-balanced_accuracy_score : 0.505
-accuracy_score : 0.469
-
-</code></pre>
 
 # Conclusion
 
@@ -282,5 +249,6 @@ References
 7. Metcalfe’s Law - calculator. (n.d.). fxSolver. https://www.fxsolver.com/browse/formulas/Metcalfe%E2%80%99s+Law
 8. Wikipedia contributors. (2022, November 7). Bitcoin. Wikipedia. https://en.wikipedia.org/wiki/Bitcoin
 
+https://buybitcoinworldwide.com/halving/
 
 https://neptune.ai/blog/arima-vs-prophet-vs-lstm
