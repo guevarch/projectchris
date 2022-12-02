@@ -162,6 +162,12 @@ Value
 r2_score = 0.988
 mean_squared_error = 0.115
 mean_absolute_error = 0.249
+
+Wallets
+r2_score = 0.997​
+mean_squared_error = 0.0741
+mean_absolute_error = 0.1325
+
 </code></pre>
 
 ## Logistic Regression Using Value(Metcalfe's Law) 
