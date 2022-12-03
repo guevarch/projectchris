@@ -133,7 +133,7 @@ p-value: 0.021000
 
 Prophet is specifically designed for business time series prediction. It achieves very good results for the stock data but it can fail on time series datasets from other domains. In particular, this holds for time series where the notion of calendar date is not applicable and we cannot learn any seasonal patterns. Prophet’s advantage is that it requires less hyperparameter tuning as it is specifically designed to detect patterns in business time series[^11]. Due to the hyperbolic exponential growth of Bitcoins price and adoption, after 2024, upper/lower/middle bound predictions "fray" - as seen on the bitcoin log price prediction and the bitcoin value prediction.
 
-The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.[^11]
+The process for prophet is to create a df_train, fitting it into a prophet model, and m.predict forecast. The forecast function splits the y value into yhat, yhat_lower and yhat_upper. This creates upper, lower and middle projections. By using m.plot(forecast), the df_train and forecast values are plotted. However, there is another method called insample wherein the analyst can set the pd.date_range of the prediction.[^11]. Insample was used to predict prices, wallets and value.
 
 
 ### Results LogPrices and Value
@@ -270,7 +270,7 @@ accuracy_score: 1.0
 </code></pre>
 
 
-## Bonus Graphs - Buy Zones 
+## Bonus Buy Zones 
 
 #### OneVsRestClassifier
 
