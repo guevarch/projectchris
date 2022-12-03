@@ -192,23 +192,23 @@ As seen below, the model has good precision and recall scores for undervalued ne
 
 Confusion Matrix
           Predicted 0	Predicted 1
-Actual 0	  1234	      8
-Actual 1	    57	      17
+Actual 0	  1242	      0
+Actual 1	    69	      5
 
-Training Score: 0.952
-Testing Score: 0.950
+Training Score: 0.942
+Testing Score: 0.947
 
               precision    recall  f1-score   support
 
-           0       0.96      0.99      0.97      1242
-           1       0.68      0.23      0.34        74
+           0       0.95      1.00      0.97      1242
+           1       1.00      0.07      0.13        74
 
     accuracy                           0.95      1316
-   macro avg       0.82      0.61      0.66      1316
-weighted avg       0.94      0.95      0.94      1316
+   macro avg       0.82      0.61      0.55      1316
+weighted avg       0.94      0.95      0.93      1316
 
-balanced_accuracy_score: 0.6116
-accuracy_score: 0.950
+balanced_accuracy_score: 0.5337
+accuracy_score: 0.947
         
 </code></pre>
 
@@ -218,19 +218,19 @@ accuracy_score: 0.950
 ### Hyperparameter Tuning
 
 <pre><code>
-Best: 0.722371 using {'C': 1.0, 'penalty': 'l2', 'solver': 'newton-cg'}
+Best: 1.000000 using {'C': 1.0, 'penalty': 'l2', 'solver': 'lbfgs'}
 </code></pre>
 
 #### LogisticRegression
 
 The 200 day moving average is widely used by traders because it is seen as a good indicator of the long term trend in the market. If price is consistently trading above the 200 day moving average, this can be viewed as an upward trending market. Markets consistently trading below the 200 day moving average are seen to be in a downtrend. The 200 day moving average can be used to identify key levels in the market that have been respected before. Often in the market, price will approach and bounce off the 200 day moving average and continue in the direction of the existing trend. Therefore, the 200 day moving average can be viewed as dynamic support or resistance. For this analysis, I took the mean of the 50, 200, and 300 day moving averages rather than simply using the 200 day. Again, since we are dealing with binary outcomes, logistic regression should work well with this dataset. 
 
-The precision score for undervaluation or 0, does significantly better than recall. The opposite is true for overvaluation or 1. In addition, the data is more balanced than  The only reasoning for this I can conceptualize is that, unlike the Value(Metcalfe's Law) data, 
+The results 
 
 <pre><code>
 df['status'].value_counts()
-0    4118
-1     268
+1    2483
+0    1642
 </code></pre>
 
 <p align="center">
@@ -240,67 +240,68 @@ df['status'].value_counts()
 <pre><code>
 
 Confusion Matrix
-          Predicted 0	Predicted 1
-Actual 0	    191	      285
-Actual 1	    41	      710
+	      Predicted 0	Predicted 1
+Actual 0	     494	    0
+Actual 1	      0	    744
 
-Training Score: 0.7353
-Testing Score: 0.7343
+Training Score: 1.0
+Testing Score: 1.0
 
               precision    recall  f1-score   support
 
-           0       0.82      0.40      0.54       476
-           1       0.71      0.95      0.81       751
+           0       1.00      1.00      1.00       494
+           1       1.00      1.00      1.00       744
 
-    accuracy                           0.73      1227
-   macro avg       0.77      0.67      0.68      1227
-weighted avg       0.76      0.73      0.71      1227
+    accuracy                           1.00      1238
+   macro avg       1.00      1.00      1.00      1238
+weighted avg       1.00      1.00      1.00      1238
 
-balanced_accuracy_score: 0.673
-accuracy_score: 0.734
+balanced_accuracy_score: 1.0
+accuracy_score: 1.0
 </code></pre>
 
-## Bonus Graphs - Min & Max Expanding mean and Buy Zones
+
+## Bonus Graphs - Buy Zones with Max Expanding Means
 
 # Conclusion
 
 # References
 
-9.1 Stationarity and differencing | Forecasting: Principles and Practice (3rd ed). (n.d.). https://otexts.com/fpp3/stationarity.html
+1. 9.1 Stationarity and differencing | Forecasting: Principles and Practice (3rd ed). (n.d.). https://otexts.com/fpp3/stationarity.html
 
-Academy, B. (n.d.). Circulating Supply. Binance Academy. https://academy.binance.com/en/glossary/circulating-supply
+2. Academy, B. (n.d.). Circulating Supply. Binance Academy. https://academy.binance.com/en/glossary/circulating-supply
 arXiv, E. T. F. T. (2020, April 2). How network theory predicts the value of Bitcoin. MIT Technology Review. https://www.technologyreview.com/2018/03/29/67091/how-network-theory-predicts-the-value-of-bitcoin/
 
-Author At, |. (n.d.). Top Cryptocurrency Countries by Adoption (2022 Data). Bankless Times. https://www.banklesstimes.com/cryptocurrency/top-countries-leading-in-cryptocurrency-adoption/
+3. Author At, |. (n.d.). Top Cryptocurrency Countries by Adoption (2022 Data). Bankless Times. https://www.banklesstimes.com/cryptocurrency/top-countries-leading-in-cryptocurrency-adoption/
 
-Bitcoin. (n.d.). MicroStrategy. https://www.michael.com/en/bitcoin
+4. Bitcoin. (n.d.). MicroStrategy. https://www.michael.com/en/bitcoin
 
-Bitcoin Inflation : Woobull Charts. (n.d.). https://charts.woobull.com/bitcoin-inflation/
+5. Bitcoin Inflation : Woobull Charts. (n.d.). https://charts.woobull.com/bitcoin-inflation/
 
-Brownlee, J. (2016, December 30). How to Check if Time Series Data is Stationary with Python. Machine Learning Mastery. https://machinelearningmastery.com/time-series-data-stationary-python/
+6. Brownlee, J. (2016, December 30). How to Check if Time Series Data is Stationary with Python. Machine Learning Mastery. https://machinelearningmastery.com/time-series-data-stationary-python/
 
-Classification: Precision and Recall  |  Machine Learning  |. (n.d.). Google Developers. https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall
+7. Classification: Precision and Recall  |  Machine Learning  |. (n.d.). Google Developers. https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall
 
-insidelearningmachines. (2022, June 12). Mean Absolute Error. Inside Learning Machines. https://insidelearningmachines.com/mean_absolute_error/
+8. insidelearningmachines. (2022, June 12). Mean Absolute Error. Inside Learning Machines. https://insidelearningmachines.com/mean_absolute_error/
 
-Isige, J. (2021, February 10). Bitcoin on track for mass adoption as it grows faster than the internet. FXStreet. https://www.fxstreet.com/cryptocurrencies/news/bitcoin-on-track-for-mass-adoption-as-it-grows-faster-than-the-internet-202102100825
+9. Isige, J. (2021, February 10). Bitcoin on track for mass adoption as it grows faster than the internet. FXStreet. https://www.fxstreet.com/cryptocurrencies/news/bitcoin-on-track-for-mass-adoption-as-it-grows-faster-than-the-internet-202102100825
 
-keziesuemo. (2021, October 15). Analysis Shows that about 85% of Circulating Bitcoin Has Not Been Sold in over Three Months. Remitano. https://remitano.com/news/dk/post/13973-analysis-shows-that-about-85-percent-of-circulating-bitcoin-has-not-been-sold-in-over-three-months
+10. keziesuemo. (2021, October 15). Analysis Shows that about 85% of Circulating Bitcoin Has Not Been Sold in over Three Months. Remitano. https://remitano.com/news/dk/post/13973-analysis-shows-that-about-85-percent-of-circulating-bitcoin-has-not-been-sold-in-over-three-months
 
-Kutzkov, K. (2022, November 14). ARIMA vs Prophet vs LSTM for Time Series Prediction. neptune.ai. https://neptune.ai/blog/arima-vs-prophet-vs-lstm
+11. Kutzkov, K. (2022, November 14). ARIMA vs Prophet vs LSTM for Time Series Prediction. neptune.ai. https://neptune.ai/blog/arima-vs-prophet-vs-lstm
 
-Mean Squared Error: Definition and Example. (2021, June 26). Statistics How To. https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/mean-squared-error/
+12. Mean Squared Error: Definition and Example. (2021, June 26). Statistics How To. https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/mean-squared-error/
 
-Metcalfe’s Law - calculator. (n.d.). fxSolver. https://www.fxsolver.com/browse/formulas/Metcalfe%E2%80%99s+Law
+13. Metcalfe’s Law - calculator. (n.d.). fxSolver. https://www.fxsolver.com/browse/formulas/Metcalfe%E2%80%99s+Law
 
-Next Bitcoin Halving 2024 Date & Countdown [BTC Clock]. (n.d.). https://buybitcoinworldwide.com/halving/
+14. Next Bitcoin Halving 2024 Date & Countdown [BTC Clock]. (n.d.). https://buybitcoinworldwide.com/halving/
 
-Otto, M. J. T. (n.d.). Bootstrap. https://getbootstrap.com/
+15. Otto, M. J. T. (n.d.). Bootstrap. https://getbootstrap.com/
 
-Snow, R. (2022, February 7). 200 Day Moving Average: What it is and How it Works. DailyFX. https://www.dailyfx.com/education/moving-averages/200-day-moving-average.html
+16. Snow, R. (2022, February 7). 200 Day Moving Average: What it is and How it Works. DailyFX. https://www.dailyfx.com/education/moving-averages/200-day-moving-average.html
 
-Taylor, S. J., & Letham, B. (2017). Forecasting at scale. PeerJ. https://doi.org/10.7287/peerj.preprints.3190v2
+17. Taylor, S. J., & Letham, B. (2017). Forecasting at scale. PeerJ. https://doi.org/10.7287/peerj.preprints.3190v2
 
-Wikipedia contributors. (2022, November 7). Bitcoin. Wikipedia. https://en.wikipedia.org/wiki/Bitcoin
+18. Wikipedia contributors. (2022, November 7). Bitcoin. Wikipedia. https://en.wikipedia.org/wiki/Bitcoin
 
-Zach. (2020, November 4). What is Overfitting in Machine Learning? (Explanation & Examples). Statology. https://www.statology.org/overfitting-machine-learning/
+19. Zach. (2020, November 4). What is Overfitting in Machine Learning? (Explanation & Examples). Statology. https://www.statology.org/overfitting-machine-learning/
