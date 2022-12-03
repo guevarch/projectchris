@@ -179,7 +179,10 @@ Best: 0.948246 using {'C': 10, 'penalty': 'l2', 'solver': 'newton-cg'}
 </code></pre>
 #### LogisticRegression
 
-Metcalfe's Law isn't exactly the best indicator for short (1-12 months) term trading as seen in the image below. The orange line shows that the network is undervalued compared to the market price, and the red shows that it is overvalued compared to the market price. The true value of Metcalfe's Law is for long term investors that have a ~10-20 year outlook that believe that network growth and usage will penetrate the population in the same fashion as the internet in the 90-00's. Since there are only two outputs or binary outcomes, logistic regression should work well with this dataset. As seen below, the model has good precision and recall scores for undervalued network. Conversely, the scores are all lowered when testing for overvalued network. I suspect t 
+Metcalfe's Law isn't exactly the best indicator for short (1-12 months) term trading as seen in the image below. The orange line shows that the network is undervalued compared to the market price, and the red shows that it is overvalued compared to the market price. The true value of Metcalfe's Law is for long term investors that have a ~10-20 year outlook that believe that network growth and usage will penetrate the population in the same fashion as the internet in the 90-00's. Since there are only two outputs or binary outcomes, logistic regression should work well with this dataset. Nonetheless, this metric still provides good insight into network valuation. It is interesting to see that overvaluation occurs in the beginning of the price history (2011 ish) and during the summer of 2021. In 2011, there were few users in the network and the chain had little value, Satoshi and a few other cypherpunks were the few users at the time. However in 2021, this was probably due to excess leverage from the FTX/Alameda saga we are seeing unwinding today. The price was drawn up due to "paper" or fractional bitcoin trading rather than user generated growth or active addresses using the network. 
+
+As seen below, the model has good precision and recall scores for undervalued network. Conversely, the scores are all lower when testing for overvalued network. Both precision and recall scores were down from predicting undervaluation. The combination of the model and the metric is a good indicator for excess leverage in the system and a good indicator for active user usage as it relates to price/value.
+
 
 <p align="center">
   <img width="460" height="300" src="static\bitcoinvaluestatus.png">
@@ -220,9 +223,15 @@ Best: 0.722371 using {'C': 1.0, 'penalty': 'l2', 'solver': 'newton-cg'}
 
 #### LogisticRegression
 
-The 200 day moving average is widely used by traders because it is seen as a good indicator of the long term trend in the market. If price is consistently trading above the 200 day moving average, this can be viewed as an upward trending market. Markets consistently trading below the 200 day moving average are seen to be in a downtrend. The 200 day moving average can be used to identify key levels in the market that have been respected before. Often in the market, price will approach and bounce off the 200 day moving average and continue in the direction of the existing trend. Therefore, the 200 day moving average can be viewed as dynamic support or resistance. For this analysis, I took the mean of the 50, 200, and 300 day moving averages rather than simply using the 200 day. Again, since we are dealing with binary outcomes, logistic regression should work well with this dataset. Interestingly, for undervaluation or 0, the model does significantly better than recall. On the other hand, the recall scores were better for overvaluation or 1 than the precision scores.
+The 200 day moving average is widely used by traders because it is seen as a good indicator of the long term trend in the market. If price is consistently trading above the 200 day moving average, this can be viewed as an upward trending market. Markets consistently trading below the 200 day moving average are seen to be in a downtrend. The 200 day moving average can be used to identify key levels in the market that have been respected before. Often in the market, price will approach and bounce off the 200 day moving average and continue in the direction of the existing trend. Therefore, the 200 day moving average can be viewed as dynamic support or resistance. For this analysis, I took the mean of the 50, 200, and 300 day moving averages rather than simply using the 200 day. Again, since we are dealing with binary outcomes, logistic regression should work well with this dataset. 
 
-Need to explain why?
+The precision score for undervaluation or 0, does significantly better than recall. The opposite is true for overvaluation or 1. In addition, the data is more balanced than  The only reasoning for this I can conceptualize is that, unlike the Value(Metcalfe's Law) data, 
+
+<pre><code>
+df['status'].value_counts()
+0    4118
+1     268
+</code></pre>
 
 <p align="center">
   <img width="460" height="300" src="static\movingaverages.png">
