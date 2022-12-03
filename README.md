@@ -145,7 +145,7 @@ The process for prophet is to create a df_train, fitting it into a prophet model
   <img src="static\wallets.png" width="400" title="hover text">
 </p>
 
-We can see below that log prices do in fact produce a better r2, mse, and mbe score compared to the linear prices. The mean squared error (MSE) tells you how close a regression line is to a set of points. It does this by taking the distances from the points to the regression line (these distances are the “errors”) and squaring them. The mean absolute error is the average difference between the observations (true values) and model output (predictions).  In summary, the lower the mse and mbe the better the forecast. However, I am a bit skeptical of these values. Even though on paper these are great results they could be due to overfitting. The same goes for the scores of Value. They look too good to be true. 
+We can see below that log prices do in fact produce a better r2, mse, and mbe score compared to the linear prices. The mean squared error (MSE) tells you how close a regression line is to a set of points. It does this by taking the distances from the points to the regression line (these distances are the “errors”) and squaring them. The mean absolute error is the average difference between the observations (true values) and model output (predictions).  In summary, the lower the mse and mbe the better the forecast. However, I am a bit skeptical of these values. Even though on paper these are great results they could be due to overfitting. The same goes for the scores of Value. They look too good to be true which they probably are.  
 
 <pre><code>
 LogPrices
@@ -181,6 +181,13 @@ Best: 0.948246 using {'C': 10, 'penalty': 'l2', 'solver': 'newton-cg'}
 
 Metcalfe's Law isn't exactly the best indicator for short (1-12 months) term trading as seen in the image below. The orange line shows that the network is undervalued compared to the market price, and the red shows that it is overvalued compared to the market price. The true value of Metcalfe's Law is for long term investors that have a ~10-20 year outlook that believe that network growth and usage will penetrate the population in the same fashion as the internet in the 90-00's. Since there are only two outputs or binary outcomes, logistic regression should work well with this dataset. Nonetheless, this metric still provides good insight into network valuation. It is interesting to see that overvaluation occurs in the beginning of the price history (2011 ish) and during the summer of 2021. In 2011, there were few users in the network and the chain had little value, Satoshi and a few other cypherpunks were the few users at the time. However in 2021, this was probably due to excess leverage from the FTX/Alameda saga we are seeing unwinding today. The price was drawn up due to "paper" or fractional bitcoin trading rather than user generated growth or active addresses using the network. 
 
+
+<pre><code>
+df['status'].value_counts()
+0    4118
+1     268
+</code></pre>
+
 As seen below, the model has good precision and recall scores for undervalued network. Conversely, the scores are all lower when testing for overvalued network. Both precision and recall scores were down from predicting undervaluation. The combination of the model and the metric is a good indicator for excess leverage in the system and a good indicator for active user usage as it relates to price/value.
 
 
@@ -213,7 +220,7 @@ accuracy_score: 0.947
 </code></pre>
 
 
-## Logistic Regression Using Mean of 50, 200, and 300 day moving averages
+## Logistic Regression Using Mean of 50, 200, and 300 day moving averages with expanding means
 
 ### Hyperparameter Tuning
 
@@ -225,7 +232,9 @@ Best: 1.000000 using {'C': 1.0, 'penalty': 'l2', 'solver': 'lbfgs'}
 
 The 200 day moving average is widely used by traders because it is seen as a good indicator of the long term trend in the market. If price is consistently trading above the 200 day moving average, this can be viewed as an upward trending market. Markets consistently trading below the 200 day moving average are seen to be in a downtrend. The 200 day moving average can be used to identify key levels in the market that have been respected before. Often in the market, price will approach and bounce off the 200 day moving average and continue in the direction of the existing trend. Therefore, the 200 day moving average can be viewed as dynamic support or resistance. For this analysis, I took the mean of the 50, 200, and 300 day moving averages rather than simply using the 200 day. Again, since we are dealing with binary outcomes, logistic regression should work well with this dataset. 
 
-The results 
+Something to note, the value counts show a more even/balanced over/undervaluation compared to the previous metric. 
+
+The results from the model show that the predictions are 100% accurate for over/undervaluation. I think this is more reflective of the metric rather than the model. No model is perfect and this one is no different.
 
 <pre><code>
 df['status'].value_counts()
@@ -261,7 +270,51 @@ accuracy_score: 1.0
 </code></pre>
 
 
-## Bonus Graphs - Buy Zones with Max Expanding Means
+## Bonus Graphs - Buy Zones 
+
+#### Keras
+
+I wanted to create a classification model using OneVsRestClassifier. To do this I first calculated a move% using the current price and the meanavge. Then I used the describe method to find the standard deviations and quartile ranges of the move% to create bins for group names. The group names are "Severely Oversold","Oversold", "Neutral","Overbought" based on the standard deviations % from the price to the meanaverage. 
+
+<pre><code>
+df['price-meanavge']=df['price'] - df['meanavge']
+df['move%'] = df['price-meanavge']/(df['price'] + df['meanavge'])
+
+bins = [-0.43, -0.1, 0, 0.1, 0.43]
+group_names = ["Severely Oversold","Oversold", "Neutral","Overbought"]
+df["Valuation"] = pd.cut(df["move%"], bins, labels=group_names)
+</code></pre>
+
+I then went through the process of testing, splitting scaling the data. I used 4 hidden nodes, relu activation, outer layer of sigmoid, sequential model, and Adamax optimizer to calculate the accuracy metrics. 
+
+The result was not very good even after trying different optimizers. 
+
+<pre><code>
+Confusion Matrix
+          Predicted 0	Predicted 1	Predicted 2	Predicted 3
+Actual 0	       232	      0	        0        	0
+Actual 1	        1	        28	      247 	    0
+Actual 2	        0	        0	        285	      1
+Actual 3	        0	        0	        2	        411
+Training Score: 0.81782
+Testing Score: 0.7920
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00       232
+           1       1.00      0.10      0.18       276
+           2       0.53      1.00      0.70       286
+           3       1.00      1.00      1.00       413
+
+    accuracy                           0.79      1207
+   macro avg       0.88      0.77      0.72      1207
+weighted avg       0.89      0.79      0.74      1207
+
+balanced_accuracy_score: 0.773
+accuracy_score: 0.792
+
+</code></pre>
+
+
 
 # Conclusion
 
