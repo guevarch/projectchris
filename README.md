@@ -234,7 +234,7 @@ The 200 day moving average is widely used by traders because it is seen as a goo
 
 Something to note, the value counts show a more even/balanced over/undervaluation compared to the previous metric. 
 
-The results from the model show that the predictions are 100% accurate for over/undervaluation. I think this is more reflective of the metric rather than the model. No model is perfect and this one is no different.
+The results from the model show that the predictions are 100% accurate for over/undervaluation. I think this is more reflective of the metric rather than the model. No model is perfect and this one is no different. I think this model/metric can be used for medium term outlook ~12months to 3 years.
 
 <pre><code>
 df['status'].value_counts()
@@ -274,7 +274,7 @@ accuracy_score: 1.0
 
 #### OneVsRestClassifier
 
-I wanted to create a classification model using OneVsRestClassifier. To do this I first calculated a move% using the current price and the meanavge. Then I used the describe method to find the standard deviations and quartile ranges of the move% to create bins for group names. The group names are "Severely Oversold","Oversold", "Neutral","Overbought" based on the standard deviations % from the price to the meanaverage.[^16]
+I wanted to create a classification model using OneVsRestClassifier. OneVsRestClassifier can also be used for multilabel classification, since we are dealing with 4 different labels/classes, I think this would be a good testing model. To do this I first calculated a move% using the current price and the meanavge. Then I used the describe method to find the standard deviations and quartile ranges of the move% to create bins for group names. The group names are "Severely Oversold","Oversold", "Neutral","Overbought" based on the standard deviations % from the price to the meanaverage.[^16]
 
 <pre><code>
 df['price-meanavge']=df['price'] - df['meanavge']
@@ -284,6 +284,8 @@ bins = [-0.43, -0.1, 0, 0.1, 0.43]
 group_names = ["Severely Oversold","Oversold", "Neutral","Overbought"]
 df["Valuation"] = pd.cut(df["move%"], bins, labels=group_names)
 </code></pre>
+
+The results show fairly straight forward predictions for Severely Oversold(0) and Overbought(3), but for Oversold(1) and neutral(2) the predictions can be mixed. This is understandable due to the unpredictability of bitcoin and of the overall market in general. 
 
 <pre><code>
 Confusion Matrix
