@@ -285,7 +285,7 @@ group_names = ["Severely Oversold","Oversold", "Neutral","Overbought"]
 df["Valuation"] = pd.cut(df["move%"], bins, labels=group_names)
 </code></pre>
 
-The results show fairly straight forward predictions for Severely Oversold(0) and Overbought(3), but for Oversold(1) and neutral(2) the predictions can be mixed. This is understandable due to the unpredictability of bitcoin and of the overall market in general. 
+The results show fairly straight forward predictions for Severely Oversold(0) and Overbought(3), but for Oversold(1) and neutral(2) the predictions were mixed. This is understandable due to the unpredictability of bitcoin and of the overall market in general. The combination of the model and the metric can be useful for determining Severely Oversold and Overbought zones. Investors that have a medium term horizon could use this metric/model for placing larger timed investments rather than dollar cost averaging. 
 
 <pre><code>
 Confusion Matrix
@@ -312,9 +312,10 @@ accuracy_score: 0.792
 
 </code></pre>
 
-
-
 # Conclusion
+
+The objective is to use the Prophet time series model to forecast price, wallets and value(according to Metcalfe’s Law) up to 2024. The second objective is to determine if the current price is overvalued or undervalued compared to Metcalfe’s Law of Network Adoptions and Moving averages. Bitcoin is very unique because it behaves like an asset and a network, therefore making price predictions and testing for network valuation can be daunting. Because of its complex nature, not one metric/model can be used to tackle this feat, it must be a combination of price behavior, technical analysis, network and user adoption. The combination of prophet time series forecasting of price, wallets and value, Logistic Regression of over/undervaluation of value, and moving averages and finally OneVsRestClassifier for buy zones are suitable ways to evaluate the value of the asset and network. 
+
 
 # References
 
