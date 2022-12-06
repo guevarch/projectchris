@@ -88,7 +88,7 @@ def route():
         # Get prediction
         predictionwall = predictionwall[predictionwall['ds'].dt.strftime('%Y-%m-%d') == Date]
         predictionwall = (predictionwall.yhat)
-        predictionwall = predictionwall.values[0].round(0)
+        predictionwall = int(predictionwall.values[0])
         # predictionwall = ("The forecasted number of bitcoin wallets are " + str(predictionwall))
       
         df = pd.read_csv("Resources/btcjoin.csv", parse_dates=['date'])
@@ -121,15 +121,15 @@ def route():
         # Average length of days price stayed under meanaverage or undervalued/severely oversold
         delta1cycle = df.index[df['date']=='2015-09-15'].tolist()[0] - df.index[df['date']=='2013-12-04'].tolist()[0]
         delta2cycle = df.index[df['date']=='2019-04-2'].tolist()[0] - df.index[df['date']=='2017-12-17'].tolist()[0] 
-        averageunder = ((delta1cycle+delta2cycle)/2)
+        averageunder = int((delta1cycle+delta2cycle)/2)
         # Average length of days from previous cycle peak to reach new all time high
         delta1fromp2p = df.index[df['date']=='2017-03-17'].tolist()[0] - df.index[df['date']=='2013-12-04'].tolist()[0]
         delta2fromp2p = df.index[df['date']=='2020-11-29'].tolist()[0] - df.index[df['date']=='2017-12-17'].tolist()[0] 
-        averagep2p = ((delta1fromp2p+delta2fromp2p)/2)
+        averagep2p = int((delta1fromp2p+delta2fromp2p)/2)
         # Days since last all time high
         sincealltimehigh = df.index[-1] - df.index[df['price']==df.price.max()].tolist()[0]
 
-        msg2 = (". The current price from the mean is "  +str(pricefrommean) + ", the average length of days price stayed under meanaverage or undervalued/severely oversold is " + str(averageunder)) + ", the average length of days from previous cycle peak to reach new all time high " + str(averagep2p) + (", and the number of days since last all time high " + str(sincealltimehigh)+ ".")
+        msg2 = (". The current price from the mean is "  +str(pricefrommean) + ", the average length of days price stayed under meanaverage or undervalued/severely oversold is " + str(averageunder)) + ", the average length of days to reach the previous cycle peak is " + str(averagep2p) + (", and the number of days since last all time high " + str(sincealltimehigh)+ ".")
         
         prediction = ("On " +str(Date) + ", the forecasted price of bitcoin is $" + str(predictionprice)) + (", the value of bitcoin is $" + str(predictionvalue) + (", and the number of bitcoin wallets are " + str(predictionwall) + str(msg2))) 
 
