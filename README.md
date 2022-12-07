@@ -312,6 +312,10 @@ accuracy_score: 0.792
 
 </code></pre>
 
+<p align="center">
+  <img width="460" height="300" src="static\buyzones.png">
+</p>
+
 # Conclusion
 
 The objective is to use the Prophet time series model to forecast price, wallets and value(according to Metcalfe’s Law) up to 2024. The second objective is to determine if the current price is overvalued or undervalued compared to Metcalfe’s Law of Network Adoptions and Moving averages, and buy zones. Bitcoin is very unique because it behaves like an asset and a network, therefore making the task of price predictions and testing for network valuation very daunting. Because of its complex nature, not one metric/model can be used to tackle this feat, it must be a combination of price behavior, technical analysis, network and user adoption. The combination of prophet time series forecasting of price, wallets and value, Logistic Regression of over/undervaluation, and moving averages and finally OneVsRestClassifier for buy zones are suitable ways to evaluate the value of the asset and network. In to build on this project or future projects regarding this subject matter, I would incorporate other technical metrics such as price on shorter time frames, broad based M2 money supply, compare to other assets such as gold, tech stocks, major indexes and other onchain analytical metrics. I would also use other more advanced machine learning methods such as ARIMA and LTSM for price predictions and forecasts. 
